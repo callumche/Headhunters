@@ -8,6 +8,7 @@ public class Entity {
     private double yv = 0;
     private double xa = 0;
     private double ya = 0;
+    private boolean inputting = false; //if a key is currently being held down
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -22,6 +23,8 @@ public class Entity {
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
             ya = -1;
         }
+        inputting = true;
+        //if (inputting) System.out.println("input");
     }
     public void keyReleased(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -36,13 +39,45 @@ public class Entity {
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
             ya = 0;
         }
+        inputting = false;
     }
 
     public void move() {
-        xv += xa;
-        yv += ya;
+        if (xv < 10 && xv > -10) { //speed cap of 10
+            xv += xa;
+        } else if (xv >= 10) { //if above speed cap, decelerate
+            xv -= 1;
+        } else if (xv <= -10) { //backwards speed cap
+            xv += 1;
+        }
+        if (yv < 10 && yv > -10) {
+            yv += ya;
+        } else if (yv >= 10) { //if above speed cap, decelerate
+            yv -= 1;
+        } else if (yv <= -10) { //backwards speed cap
+            yv += 1;
+        }
         x += xv;
+        //below are bounds checks (see if in bounds, if not, reset position to border and invert velocity
+        if (x > 1000) { //right border
+            x = 999;
+            xv = -1 * xv; //stop when you hit the border
+            System.out.println("right bounce");
+        } else if (x < 0) {
+            x = 1;
+            xv = -1 * xv;
+            System.out.println("left bounce");
+        }
         y -= yv;
+        if (y > 590) { //height of windows bar ~= 50px
+            y = 589;
+            yv = -1 * yv;
+            System.out.println("bottom bounce");
+        } else if (y < 0) {
+            y = 1;
+            yv = -1 * yv;
+            System.out.println("top bounce");
+        }
     }
 
     public void paint (Graphics2D g2d) {
