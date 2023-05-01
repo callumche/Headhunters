@@ -38,16 +38,15 @@ public class Entity {
         }
     }
 
-    public void updateMovement() {
-        x += xv;
-        y -= yv;
-
+    public void move() {
         xv += xa;
         yv += ya;
+        x += xv;
+        y -= yv;
     }
 
     public void paint (Graphics2D g2d) {
         g2d.fillRect(x, y, 20, 20);
-        updateMovement();
+        move();
     }
 }

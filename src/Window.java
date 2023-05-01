@@ -13,11 +13,14 @@ public class Window extends JPanel {
             }
             @Override
             public void keyReleased(KeyEvent e) {
+                e1.keyReleased(e);
             }
             @Override
             public void keyPressed(KeyEvent e) {
+                e1.keyPressed(e);
             }
         });
+        setFocusable(true);
     }
 
     public void paint(Graphics g){
