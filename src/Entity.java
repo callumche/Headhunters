@@ -62,36 +62,36 @@ public class Entity {
         //below are bounds checks (see if in bounds, if not, reset position to border and invert velocity
         if (x > 1000) { //right border
             x = 999;
-            xv = -1 * xv + 1; //stop when you hit the border
+            xv = -0.75 * xv; //bounce inelastically when you hit the border
             System.out.println("right bounce");
         } else if (x < 0) {
             x = 1;
-            xv = -1 * xv - 1;
+            xv = -0.75 * xv;
             System.out.println("left bounce");
         }
         y -= yv;
         if (y > 590) { //height of windows bar ~= 50px
             y = 589;
-            yv = -1 * yv - 1;
+            yv = -0.5 * yv;
             System.out.println("bottom bounce");
         } else if (y < 0) {
             y = 1;
-            yv = -1 * yv + 1;
+            yv = -0.5 * yv;
             System.out.println("top bounce");
         }
 
         //friction, constantly decelerating at 0.1
         if (xv > 0.1) {
-            xv -= 0.1;
+            xv -= 0.2;
         } else if (xv < -0.1) {
-            xv += 0.1;
+            xv += 0.2;
         } else {
             xv = 0;
         }
         if (yv > 0.1) {
-            yv -= 0.1;
+            yv -= 0.2;
         } else if (yv < -0.1) {
-            yv += 0.1;
+            yv += 0.2;
         } else {
             yv = 0;
         }
