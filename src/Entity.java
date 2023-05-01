@@ -8,8 +8,8 @@ public class Entity {
     private double yv = 0;
     private double xa = 0;
     private double ya = 0;
-    private boolean inputting = false; //if a key is currently being held down
     private int speedCap = 15;
+    private int jumpCount = 0; //int not boolean for possible future double+ jump support
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -19,13 +19,15 @@ public class Entity {
             xa = 1;
         }
         if (e.getKeyCode() == KeyEvent.VK_UP){
-            ya = 1;
+            if (jumpCount < 2) {
+                jumpCount++;
+                yv = 15;
+            }
+            //ya = 1;
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            ya = -1;
+            //ya = -1;
         }
-        inputting = true;
-        //if (inputting) System.out.println("input");
     }
     public void keyReleased(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -35,15 +37,16 @@ public class Entity {
             xa = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_UP){
-            ya = 0;
+            //ya = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            ya = 0;
+            //ya = 0;
         }
-        inputting = false;
     }
 
+
     public void move() {
+        //speedcaps first
         if (xv < speedCap && xv > -speedCap) { //speed cap of 10
             xv += xa;
         } else if (xv >= speedCap) { //if above speed cap, decelerate
@@ -52,16 +55,20 @@ public class Entity {
             xv += 1;
         }
         if (yv < speedCap && yv > -speedCap) {
-            yv += ya;
+            yv += ya; //hardcoded to apply gravity when not on ground
+            if (y < 590) {
+                yv -= 0.5;
+            }
         } else if (yv >= speedCap) { //if above speed cap, decelerate
             yv -= 1;
         } else if (yv <= -speedCap) { //backwards speed cap
             yv += 1;
         }
+
         x += xv;
         //below are bounds checks (see if in bounds, if not, reset position to border and invert velocity
         if (x > 1000) { //right border
-            x = 999;
+            x = 1000;
             xv = -0.75 * xv; //bounce inelastically when you hit the border
             System.out.println("right bounce");
         } else if (x < 0) {
@@ -71,16 +78,27 @@ public class Entity {
         }
         y -= yv;
         if (y > 590) { //height of windows bar ~= 50px
-            y = 589;
+            y = 590;
+            ya = 0;
             yv = -0.5 * yv;
+            if (yv <= 4) {
+                jumpCount = 0;
+                yv = 0;
+                System.out.println("Reset count!");
+            }
             System.out.println("bottom bounce");
         } else if (y < 0) {
             y = 1;
             yv = -0.5 * yv;
             System.out.println("top bounce");
         }
-
+        if (y >= 585) {
+            friction();
+        }
         //friction, constantly decelerating at 0.1
+    }
+
+    public void friction(){
         if (xv > 0.1) {
             xv -= 0.2;
         } else if (xv < -0.1) {
@@ -95,7 +113,6 @@ public class Entity {
         } else {
             yv = 0;
         }
-
     }
 
     public void paint (Graphics2D g2d) {
