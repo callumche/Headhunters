@@ -8,7 +8,7 @@ public class Entity {
     private double yv = 0;
     private double xa = 0;
     private double ya = 0;
-    private int speedCap = 15;
+    private int speedCap = 25;
     private int jumpCount = 0; //int not boolean for possible future double+ jump support
 
     public void keyPressed(KeyEvent e){
