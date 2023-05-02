@@ -13,10 +13,10 @@ public class Entity {
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            xa = -1;
+            xa = -2;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-            xa = 1;
+            xa = 2;
         }
         if (e.getKeyCode() == KeyEvent.VK_UP){
             if (jumpCount < 2) {

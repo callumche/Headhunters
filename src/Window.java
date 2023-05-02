@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 public class Window extends JPanel {
     Entity e1 = new Entity();
@@ -42,6 +48,7 @@ public class Window extends JPanel {
 
         while(true){
             Thread.sleep(16);
+            //Thread.sleep(60);
             frame.repaint();
         }
     }
