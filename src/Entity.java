@@ -56,7 +56,7 @@ public class Entity {
         }
         if (yv < speedCap && yv > -speedCap) {
             yv += ya; //hardcoded to apply gravity when not on ground
-            if (y < 590) {
+            if (y < 580) {
                 yv -= 0.5;
             }
         } else if (yv >= speedCap) { //if above speed cap, decelerate
@@ -67,8 +67,8 @@ public class Entity {
 
         x += xv;
         //below are bounds checks (see if in bounds, if not, reset position to border and invert velocity
-        if (x > 1000) { //right border
-            x = 1000;
+        if (x > 990) { //right border
+            x = 990;
             xv = -0.75 * xv; //bounce inelastically when you hit the border
             System.out.println("right bounce");
         } else if (x < 0) {
@@ -77,8 +77,8 @@ public class Entity {
             System.out.println("left bounce");
         }
         y -= yv;
-        if (y > 590) { //height of windows bar ~= 50px
-            y = 590;
+        if (y > 580) { //height of windows bar ~= 50px
+            y = 580;
             ya = 0;
             yv = -0.5 * yv;
             if (yv <= 4) {
@@ -92,7 +92,7 @@ public class Entity {
             yv = -0.5 * yv;
             System.out.println("top bounce");
         }
-        if (y >= 585) {
+        if (y == 580) {
             friction();
         }
         //friction, constantly decelerating at 0.1
