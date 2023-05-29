@@ -1,8 +1,8 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Entity {
-    private int x = 600;
+public class Entity2 {
+    private int x = 300;
     private int y = 300;
     private double xv = 0;
     private double yv = 0;
@@ -12,13 +12,13 @@ public class Entity {
     private int jumpCount = 0; //int not boolean for possible future double+ jump support
 
     public void keyPressed(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (e.getKeyCode() == KeyEvent.VK_A){
             xa = -5;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (e.getKeyCode() == KeyEvent.VK_D){
             xa = 5;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP){
+        if (e.getKeyCode() == KeyEvent.VK_W){
             if (jumpCount < 2) {
                 jumpCount++;
                 yv = 15;
@@ -30,13 +30,13 @@ public class Entity {
         }
     }
     public void keyReleased(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (e.getKeyCode() == KeyEvent.VK_A){
             xa = 0;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (e.getKeyCode() == KeyEvent.VK_D){
             xa = 0;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP){
+        if (e.getKeyCode() == KeyEvent.VK_W){
             //ya = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN){
@@ -116,7 +116,7 @@ public class Entity {
     }
 
     public void paint (Graphics2D g2d) {
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Color.RED);
         g2d.fillRect(x, y, 20, 20);
         move();
     }

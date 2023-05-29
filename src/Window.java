@@ -11,6 +11,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Window extends JPanel {
     Entity e1 = new Entity();
+    Entity2 e2 = new Entity2();
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -20,12 +21,12 @@ public class Window extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 e1.keyReleased(e);
-
+                e2.keyReleased(e);
             }
             @Override
             public void keyPressed(KeyEvent e) {
                 e1.keyPressed(e);
-
+                e2.keyPressed(e);
             }
         });
         setFocusable(true);
@@ -34,6 +35,7 @@ public class Window extends JPanel {
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         e1.paint(g2d);
+        e2.paint(g2d);
     }
 
     public static void main(String[] args) throws InterruptedException {
