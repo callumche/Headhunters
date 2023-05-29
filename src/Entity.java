@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Entity {
+    private boolean left = false, right = false;
     private int x = 600;
     private int y = 300;
     private double xv = 0;
