@@ -10,7 +10,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Window extends JPanel {
-    Entity e1 = new Entity();
+    Naufil n1 = new Naufil();
+    public static final int resX = 1920, resY = 1080;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -19,11 +20,11 @@ public class Window extends JPanel {
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                e1.keyReleased(e);
-            }
+                n1.keyReleased(e);
+            } //problem: have to know what classes to send keypresses to
             @Override
             public void keyPressed(KeyEvent e) {
-                e1.keyPressed(e);
+                n1.keyPressed(e);
             }
         });
         setFocusable(true);
@@ -31,14 +32,14 @@ public class Window extends JPanel {
 
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
-        e1.paint(g2d);
+        n1.paint(g2d);
     }
 
     public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame("HeadHunters");
         Window win = new Window();
         frame.add(win);
-        frame.setSize(1020, 640);
+        frame.setSize(resX, resY);
         frame.setVisible(true);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);

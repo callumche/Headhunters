@@ -29,3 +29,4 @@ bin/
 .DS_Store
 .idea/discord.xml
 *.xml
+.idea/misc.xml
