@@ -10,14 +10,16 @@ public class Entity {
     private double xa = 0;
     private double ya = 0;
     private int speedCap = 10;
-    private int jumpCount = 0; //int not boolean for possible future double+ jump support
+    private int jumpCount = 0;
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            xa = -5;
+            left = true;
+            //xa = -5;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-            xa = 5;
+            right = true;
+            //xa = 5;
         }
         if (e.getKeyCode() == KeyEvent.VK_UP){
             if (jumpCount < 2) {
@@ -32,9 +34,10 @@ public class Entity {
     }
     public void keyReleased(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            xa = 0;
+            left = false;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+            right = false;
             xa = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_UP){
@@ -48,6 +51,17 @@ public class Entity {
 
     public void move() {
         //speedcaps first
+        if (left) { //understand that this can be hardcoded directly to +/- to speed, but doing xa for clarity
+            xa = -5;
+        } else if (!right) {
+            xa = 0;
+        }
+        if (right) {
+            xa = 5;
+        } else if (!left) {
+            xa = 0;
+        }
+
         if (xv < speedCap && xv > -speedCap) { //speed cap of 10
             xv += xa;
         } else if (xv >= speedCap) { //if above speed cap, decelerate
