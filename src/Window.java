@@ -14,6 +14,7 @@ public class Window extends JPanel {
     CharacterSelect charMenu = new CharacterSelect();
     public static final int resX = 1920, resY = 1080;
     private int stage = 0;
+    private static long globalTick = 0;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -40,6 +41,10 @@ public class Window extends JPanel {
 
     }
 
+    public long getTick() {
+        return globalTick;
+    }
+
     public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame("HeadHunters");
         Window win = new Window();
@@ -53,6 +58,7 @@ public class Window extends JPanel {
         while(true){
             Thread.sleep(16);
             //Thread.sleep(60);
+            globalTick++;
             frame.repaint();
         }
     }
