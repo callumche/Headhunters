@@ -8,8 +8,9 @@ public class SelectScreen {
     private int startState = 0; //converted boolean into start phase (0 = splash, 1 = char select, 2 = arena)
     private boolean isInitialized = false;
     private BufferedImage splash = null, julian = null, callum = null, naufil = null;
-
+    private Font f = null;
     public void init() {
+        f = new Font("Comic Sans MS", Font.BOLD, 36);
         try {
             splash = ImageIO.read(new File("res\\TitleSplash.png"));
             julian = ImageIO.read(new File("res\\Sprites\\JulianSelect.PNG"));
@@ -31,8 +32,11 @@ public class SelectScreen {
         g2d.fillRect(0, 0, Window.resX, Window.resY);
         if (startState == 0) { //first phase, splash
             g2d.drawImage(splash, 0, 0, null);
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(f);
+            System.out.println(g2d.getFontMetrics());
             if (Window.getTick() % 100 > 30) {
-                g2d.drawString("Press SPACE to Scrum:", 600 , 500);
+                g2d.drawString("Press SPACE to Scrum:", 748 , 590);
             }
         }
         if (startState == 1) { //second phase, character select
