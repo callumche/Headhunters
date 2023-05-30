@@ -2,16 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Window extends JPanel {
     Naufil n1 = new Naufil();
-    CharacterSelect charMenu = new CharacterSelect();
+    SelectScreen charMenu = new SelectScreen();
     public static final int resX = 1920, resY = 1080;
     private int stage = 0;
     private static long globalTick = 0;

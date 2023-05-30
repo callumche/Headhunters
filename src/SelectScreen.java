@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class CharacterSelect {
+public class SelectScreen {
     private boolean startMenu = true;
     public void paint (Graphics2D g2d){
         if (startMenu) {
