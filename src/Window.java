@@ -11,6 +11,8 @@ public class Window extends JPanel {
     private int stage = 0;
     private static long globalTick = 0;
     private static boolean isStarting = true;
+    private static int playerOneSelect = 0;
+    private static int playerTwoSelect = 0;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -38,12 +40,12 @@ public class Window extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         if (isStarting) {
             startMenu.paint(g2d);
+        } else {
+            n1.paint(g2d);
         }
-        n1.paint(g2d);
-
     }
 
-    public long getTick() {
+    public static long getTick() {
         return globalTick;
     }
 
@@ -58,8 +60,8 @@ public class Window extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         while(true){
-            Thread.sleep(16);
-            //Thread.sleep(60);
+            Thread.sleep(16); //roughly 60FPS
+            //Thread.sleep(60); //debug
             globalTick++;
             frame.repaint();
         }
