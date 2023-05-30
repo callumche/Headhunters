@@ -11,7 +11,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Window extends JPanel {
     Naufil n1 = new Naufil();
+    CharacterSelect charMenu = new CharacterSelect();
     public static final int resX = 1920, resY = 1080;
+    private int stage = 0;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -24,6 +26,7 @@ public class Window extends JPanel {
             } //problem: have to know what classes to send keypresses to
             @Override
             public void keyPressed(KeyEvent e) {
+                charMenu.keyPressed(e);
                 n1.keyPressed(e);
             }
         });
@@ -32,7 +35,9 @@ public class Window extends JPanel {
 
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
+        charMenu.paint(g2d);
         n1.paint(g2d);
+
     }
 
     public static void main(String[] args) throws InterruptedException {

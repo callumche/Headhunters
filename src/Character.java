@@ -86,11 +86,11 @@ public abstract class Character {
         if (x > Window.resX - 200) { //right border
             x = Window.resX - 200;
             xv = -0.75 * xv; //bounce inelastically when you hit the border
-            System.out.println("right bounce");
+            //System.out.println("right bounce");
         } else if (x < 0) {
             x = 1;
             xv = -0.75 * xv;
-            System.out.println("left bounce");
+            //System.out.println("left bounce");
         }
         y -= yv;
         if (y > Window.resY - 50 - 200) { //height of windows bar ~= 50px
@@ -100,13 +100,13 @@ public abstract class Character {
             if (yv <= 4) {
                 jumpCount = 0;
                 yv = 0;
-                System.out.println("Reset count!");
+                //System.out.println("Reset count!");
             }
-            System.out.println("bottom bounce");
+            //System.out.println("bottom bounce");
         } else if (y < 0) {
             y = 1;
             yv = -0.5 * yv;
-            System.out.println("top bounce");
+            //System.out.println("top bounce");
         }
         if (y >= Window.resY - 55 - 200) {
             friction();
