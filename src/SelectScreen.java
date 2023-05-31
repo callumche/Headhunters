@@ -9,7 +9,12 @@ public class SelectScreen {
     private boolean isInitialized = false;
     private BufferedImage splash = null, julian = null, callum = null, naufil = null;
     private Font f = null;
-    private int selector = 0;
+    private int pOneSelect = 0;
+    private int pTwoSelect = 2;
+
+    private boolean oneDone = false;
+    private boolean twoDone = false;
+
     public void init() {
         f = new Font("Comic Sans MS", Font.BOLD, 36);
         try {
@@ -22,15 +27,19 @@ public class SelectScreen {
         }
         isInitialized = true;
     }
+
     public void paint (Graphics2D g2d){
         if (!isInitialized) {
             init();
         }
-        if (startState >= 4) {
+
+        if (startState >= 3) {
             Window.endStart();
         }
+
         g2d.setColor(Color.red);
-        g2d.fillRect(0, 0, Window.resX, Window.resY);
+        g2d.fillRect(0, 0, Window.resX, Window.resY);//background
+
         if (startState == 0) { //first phase, splash
             g2d.drawImage(splash, 0, 0, null);
             g2d.setColor(Color.WHITE);
@@ -40,15 +49,23 @@ public class SelectScreen {
                 g2d.drawString("Press SPACE to Scrum:", 748 , 590);
             }
         }
-        if (startState == 1 || startState == 2) { //second phase, character select
-            g2d.setColor(Color.yellow);
-            if (selector==0){
-                g2d.fillOval(500,200,50,50);
-            } else if (selector == 1){
-                g2d.fillOval(900,200,50,50);
-            } else {
-                g2d.fillOval(1300,200,50,50);
+
+        if (startState == 1) { //second phase, character select
+            g2d.setStroke(new BasicStroke(10));
+
+            if (pOneSelect == 0) {
+                g2d.setStroke(new BasicStroke(10));
+                if (pTwoSelect == pOneSelect) {
+                    g2d.setColor(new Color(255, 0, 255));
+                } else {
+                    g2d.setColor(Color.BLUE);
+                }
+                g2d.drawRect(370, 320, 360, 400);
+
             }
+
+            g2d.setStroke(new BasicStroke(1));
+
             g2d.setColor(Color.darkGray);
             g2d.fillRect(370, 320, 360, 400);
             g2d.drawImage(julian, 350, 320,400,400,null);
@@ -56,6 +73,10 @@ public class SelectScreen {
             g2d.drawImage(callum, 750, 320,400,400, null);
             g2d.fillRect(1170, 320, 360, 400);
             g2d.drawImage(naufil, 1150, 320,400,400, null);
+
+            if (Window.getPlayerOneSelect() < 3 && Window.getPlayerTwoSelect() < 3) {
+                startState++;
+            }
         }
 
     }
@@ -65,30 +86,52 @@ public class SelectScreen {
             if(startState == 0){
                 startState++;
             }
-            if(startState == 1){
-                Window.setPlayerOneSelect(selector);
-                startState++;
+            if (startState == 1) {
+                Window.setPlayerOneSelect(pOneSelect);
+                oneDone = true;
             }
-            if(startState == 2 && Window.getPlayerOneSelect()!=selector){
-                Window.setPlayerTwoSelect(selector);
-                startState++;
-            }
-            if(startState==3){
+            if (startState == 2 && Window.getPlayerOneSelect() != pOneSelect) {
+                Window.setPlayerTwoSelect(pTwoSelect);
                 startState++;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            if (selector!=0) {
-                selector--;
-            } else {
-                selector = 2;
+        if (e.getKeyCode() == KeyEvent.VK_ENTER){ //P2 Select
+            if (startState == 1) {
+                Window.setPlayerTwoSelect(pTwoSelect);
+                oneDone = true;
+            }
+            if (startState == 2 && Window.getPlayerTwoSelect() != pOneSelect) {
+                Window.setPlayerTwoSelect(pTwoSelect);
+                startState++;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-            if (selector!=2) {
-                selector++;
+
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            if (pOneSelect!=0) {
+                pOneSelect--;
             } else {
-                selector = 0;
+                pOneSelect = 2;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            if (pOneSelect != 2) {
+                pOneSelect++;
+            } else {
+                pOneSelect = 0;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            if (pTwoSelect != 0) {
+                pTwoSelect--;
+            } else {
+                pTwoSelect = 2;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            if (pOneSelect != 2) {
+                pTwoSelect++;
+            } else {
+                pTwoSelect = 0;
             }
         }
     }

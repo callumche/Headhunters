@@ -11,8 +11,8 @@ public class Window extends JPanel {
     private int stage = 0;
     private static long globalTick = 0;
     private static boolean isStarting = true;
-    private static int playerOneSelect = 0;
-    private static int playerTwoSelect = 0;
+    private static int playerOneSelect = 4;
+    private static int playerTwoSelect = 4;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -41,6 +41,9 @@ public class Window extends JPanel {
     public static int getPlayerOneSelect(){
         return playerOneSelect;
     }
+    public static int getPlayerTwoSelect(){
+        return playerTwoSelect;
+    }
     public static void endStart() {
         isStarting = false;
     }
@@ -49,8 +52,6 @@ public class Window extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         if (isStarting) {
             startMenu.paint(g2d);
-            System.out.println("P1= "+playerOneSelect);
-            System.out.println("P2= "+playerTwoSelect);
         } else {
             n1.paint(g2d);
         }

@@ -16,46 +16,32 @@ public abstract class Character {
     public void updateDirection() {
         if (xv < 0) {
             lookingDirection = false;
-            System.out.println("look let");
         } else if (xv > 0) { // if not moving, look in prior direction
             lookingDirection = true; //LOOK RIGHT
-            System.out.println("look right!!!!!");
         }
     }
 
     public void keyPressed(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (e.getKeyCode() == KeyEvent.VK_A){
             left = true;
-            //xa = -5;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (e.getKeyCode() == KeyEvent.VK_D){
             right = true;
-            //xa = 5;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP){
+        if (e.getKeyCode() == KeyEvent.VK_W){
             if (jumpCount < 2) {
                 jumpCount++;
                 yv = 30;
             }
-            //ya = 1;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            //ya = -1;
         }
     }
     public void keyReleased(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (e.getKeyCode() == KeyEvent.VK_A){
             left = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (e.getKeyCode() == KeyEvent.VK_D){
             right = false;
             xa = 0;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP){
-            //ya = 0;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            //ya = 0;
         }
     }
 
@@ -91,8 +77,8 @@ public abstract class Character {
         } else if (yv <= -speedCap - 10) {
             yv += 1;
         }
-
         x += xv;
+
         //below are bounds checks (see if in bounds, if not, reset position to border and invert velocity
         if (x > Window.resX - 200) { //right border
             x = Window.resX - 200;
@@ -104,6 +90,7 @@ public abstract class Character {
             //System.out.println("left bounce");
         }
         y -= yv;
+
         if (y > Window.resY - 50 - 200) { //height of windows bar ~= 50px
             y = Window.resY - 50 - 200;
             ya = 0;
