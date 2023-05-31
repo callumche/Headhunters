@@ -2,15 +2,15 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public abstract class Character {
-    private boolean left = false, right = false;
+    protected boolean left = false, right = false;
     protected int x = 600;
     protected int y = 300;
-    private double xv = 0;
-    private double yv = 0;
-    private double xa = 0;
-    private double ya = -1.5;
-    private int speedCap = 20;
-    private int jumpCount = 0;
+    protected double xv = 0;
+    protected double yv = 0;
+    protected double xa = 0;
+    protected double ya = -1.5;
+    protected int speedCap = 20;
+    protected int jumpCount = 0;
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -134,4 +134,6 @@ public abstract class Character {
     public void paint (Graphics2D g2d) { //holding out temporarily
         move();
     }
+
+    public int getJumpCount() {return jumpCount;}
 }

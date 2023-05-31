@@ -19,5 +19,24 @@ public class Naufil extends Character {
         }
         g2d.drawImage(neutral, x, y, null);
         move();
+
+        if (getJumpCount() != 0) {
+
+            try {
+                neutral = ImageIO.read(new File("res\\Sprites\\NaufilJump.PNG"));
+            } catch (IOException e) {
+                System.out.println("Missing Naufil Image: " + e);
+            }
+
+        } else {
+
+            try {
+                neutral = ImageIO.read(new File("res\\Sprites\\NaufilNeutral.PNG"));
+            } catch (IOException e) {
+                System.out.println("Missing Naufil Image: " + e);
+            }
+
+        }
+
     }
 }
