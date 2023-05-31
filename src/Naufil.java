@@ -5,37 +5,26 @@ import java.io.*;
 
 public class Naufil extends Character {
     private boolean isInitialized = false;
-    private BufferedImage neutral = null;
-
+    private BufferedImage neutral = null, jump = null;
+    private BufferedImage current = null;
 
     public void paint(Graphics2D g2d){
         if (!isInitialized) { //loads naufil pics into memory on first frame
             try {
                 neutral = ImageIO.read(new File("res\\Sprites\\NaufilNeutral.PNG"));
+                jump = ImageIO.read(new File("res\\Sprites\\NaufilJump.PNG"));
             } catch (IOException e) {
                 System.out.println("Missing Naufil Image: " + e);
             }
             isInitialized = true;
         }
-        g2d.drawImage(neutral, x, y, null);
+        g2d.drawImage(current, x, y, null);
         move();
 
         if (jumpCount != 0) {
-
-            try {
-                neutral = ImageIO.read(new File("res\\Sprites\\NaufilJump.PNG"));
-            } catch (IOException e) {
-                System.out.println("Missing Naufil Image: " + e);
-            }
-
+            current = jump;
         } else {
-
-            try {
-                neutral = ImageIO.read(new File("res\\Sprites\\NaufilNeutral.PNG"));
-            } catch (IOException e) {
-                System.out.println("Missing Naufil Image: " + e);
-            }
-
+            current = neutral;
         }
 
     }
