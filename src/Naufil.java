@@ -18,14 +18,21 @@ public class Naufil extends Character {
             }
             isInitialized = true;
         }
-        g2d.drawImage(current, x, y, null);
-        move();
 
         if (jumpCount != 0) {
             current = jump;
         } else {
             current = neutral;
         }
+
+        if (lookingDirection) {
+            g2d.drawImage(current, x + current.getWidth(), y, -current.getWidth(), current.getHeight(), null); //mirrored, look right
+        } else {
+            g2d.drawImage(current, x, y, current.getWidth(), current.getHeight(), null);
+        }
+        move();
+        updateDirection();
+
 
     }
 }

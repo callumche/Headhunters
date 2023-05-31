@@ -11,6 +11,17 @@ public abstract class Character {
     protected double ya = -1.5;
     protected int speedCap = 20;
     protected int jumpCount = 0;
+    protected boolean lookingDirection = true; //false = left, true = right
+
+    public void updateDirection() {
+        if (xv < 0) {
+            lookingDirection = false;
+            System.out.println("look let");
+        } else if (xv > 0) { // if not moving, look in prior direction
+            lookingDirection = true; //LOOK RIGHT
+            System.out.println("look right!!!!!");
+        }
+    }
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
