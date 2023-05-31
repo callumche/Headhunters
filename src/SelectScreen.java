@@ -5,7 +5,7 @@ import javax.imageio.*;
 import java.io.*;
 
 public class SelectScreen {
-    private int startState = 0; //converted boolean into start phase (0 = splash, 1 = char and arena select, 2 = arena)
+    private int startState = 0; //converted boolean into start phase (0 = splash, 1 = char 1 select, 2 = char 2 select, 3 = arena select, 4 = scrum
     private boolean isInitialized = false;
     private BufferedImage splash = null, julian = null, callum = null, naufil = null;
     private Font f = null;
@@ -26,7 +26,7 @@ public class SelectScreen {
         if (!isInitialized) {
             init();
         }
-        if (startState > 2) {
+        if (startState >= 4) {
             Window.endStart();
         }
         g2d.setColor(Color.red);
@@ -40,7 +40,7 @@ public class SelectScreen {
                 g2d.drawString("Press SPACE to Scrum:", 748 , 590);
             }
         }
-        if (startState == 1) { //second phase, character select
+        if (startState == 1 || startState == 2) { //second phase, character select
             g2d.setColor(Color.yellow);
             if (selector==0){
                 g2d.fillOval(500,200,50,50);
@@ -62,8 +62,20 @@ public class SelectScreen {
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_SPACE){
-            //playerOneSelect = selector;
-            startState++;
+            if(startState == 0){
+                startState++;
+            }
+            if(startState == 1){
+                Window.setPlayerOneSelect(selector);
+                startState++;
+            }
+            if(startState == 2 && Window.getPlayerOneSelect()!=selector){
+                Window.setPlayerTwoSelect(selector);
+                startState++;
+            }
+            if(startState==3){
+                startState++;
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
             if (selector!=0) {

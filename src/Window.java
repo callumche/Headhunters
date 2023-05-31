@@ -32,6 +32,15 @@ public class Window extends JPanel {
         setFocusable(true);
     }
 
+    public static void setPlayerOneSelect(int n){
+        playerOneSelect = n;
+    }
+    public static void setPlayerTwoSelect(int n){
+        playerTwoSelect = n;
+    }
+    public static int getPlayerOneSelect(){
+        return playerOneSelect;
+    }
     public static void endStart() {
         isStarting = false;
     }
@@ -40,6 +49,8 @@ public class Window extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         if (isStarting) {
             startMenu.paint(g2d);
+            System.out.println("P1= "+playerOneSelect);
+            System.out.println("P2= "+playerTwoSelect);
         } else {
             n1.paint(g2d);
         }
