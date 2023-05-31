@@ -20,7 +20,7 @@ public class Naufil extends Character {
         g2d.drawImage(neutral, x, y, null);
         move();
 
-        if (getJumpCount() != 0) {
+        if (jumpCount != 0) {
 
             try {
                 neutral = ImageIO.read(new File("res\\Sprites\\NaufilJump.PNG"));

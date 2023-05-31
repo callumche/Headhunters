@@ -135,5 +135,5 @@ public abstract class Character {
         move();
     }
 
-    public int getJumpCount() {return jumpCount;}
+
 }
