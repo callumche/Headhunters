@@ -96,7 +96,7 @@ public abstract class Character {
         if (y > Window.resY - 50 - 200) { //height of windows bar ~= 50px
             y = Window.resY - 50 - 200;
             ya = 0;
-            yv = -0.5 * yv;
+            yv = -0.4 * yv;
             if (yv <= 4) {
                 jumpCount = 0;
                 yv = 0;
