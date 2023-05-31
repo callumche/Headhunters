@@ -12,6 +12,7 @@ public class SelectScreen {
     private int pOneSelect = 0, pTwoSelect = 2;
     private boolean oneDone = false, twoDone = false;
 
+
     public void init() {
         f = new Font("Comic Sans MS", Font.BOLD, 36);
         try {
@@ -26,14 +27,13 @@ public class SelectScreen {
     }
 
     public void paint (Graphics2D g2d){
-        if (!isInitialized) {
-            init();
-        }
-
         if (startState >= 3) {
             Window.endStart();
         }
 
+        if (!isInitialized) {
+            init();
+        }
         g2d.setColor(new Color(139, 0, 0));
         g2d.fillRect(0, 0, Window.resX, Window.resY);//background
 
@@ -84,11 +84,12 @@ public class SelectScreen {
 
             if (Window.getPlayerOneSelect() < 3 && Window.getPlayerTwoSelect() < 3) {
                 startState++;
+                pOneSelect = 0;
             }
         }
 
         if (startState == 2) { //arena select
-
+            
         }
     }
 

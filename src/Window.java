@@ -11,8 +11,7 @@ public class Window extends JPanel {
     private int stage = 0;
     private static long globalTick = 0;
     private static boolean isStarting = true;
-    private static int playerOneSelect = 4;
-    private static int playerTwoSelect = 4;
+    private static int playerOneSelect = 4, playerTwoSelect = 4;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -46,6 +45,14 @@ public class Window extends JPanel {
     }
     public static void endStart() {
         isStarting = false;
+    }
+
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int n) {
+        stage = n;
     }
 
     public void paint(Graphics g){
