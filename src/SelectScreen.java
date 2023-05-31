@@ -62,7 +62,8 @@ public class SelectScreen {
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_SPACE){
-            //startState++;
+            //playerOneSelect = selector;
+            startState++;
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT){
             if (selector!=0) {
