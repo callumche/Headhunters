@@ -24,6 +24,10 @@ public abstract class Character {
         }
     }
 
+    public void spit(){
+
+    }
+
     public void updateDirection() {
         if (xv < 0) {
             lookingDirection = false;
