@@ -110,7 +110,7 @@ public class SelectScreen {
                 Window.setPlayerOneSelect(pOneSelect);
                 oneDone = true;
             } else if (startState == 2) {
-                //pass arenaSelectNum to the window class
+                Window.setArenaSelect(arenaSelectNum);
                 startState++;
             }
         }
