@@ -6,29 +6,31 @@ import java.io.IOException;
 
 public class Callum extends Character{
     private boolean isInitialized = false;
-    private BufferedImage neutral = null, jump = null;
-    private BufferedImage current = null;
 
     public Callum (boolean p) {
         super(p);
     }
 
     public void paint(Graphics2D g2d){
-        if (!isInitialized) { //loads naufil pics into memory on first frame
+        if (!isInitialized) { //loads pics into memory on first frame
             try {
                 neutral = ImageIO.read(new File("res\\Sprites\\CallumNeutral.PNG"));
                 jump = ImageIO.read(new File("res\\Sprites\\CallumJump.PNG"));
+                bite1 = ImageIO.read(new File("res\\Sprites\\CallumBite1.PNG"));
+                bite2 = ImageIO.read(new File("res\\Sprites\\CallumBite2.PNG"));
+                headbutt = ImageIO.read(new File("res\\Sprites\\CallumHeadbutt.PNG"));
+                hurt = ImageIO.read(new File("res\\Sprites\\CallumHurt.PNG"));
+                special = ImageIO.read(new File("res\\Sprites\\CallumSpecial.PNG"));
+                spit1 = ImageIO.read(new File("res\\Sprites\\CallumSpit1.PNG"));
+                spit2 = ImageIO.read(new File("res\\Sprites\\CallumSpit2.PNG"));
             } catch (IOException e) {
-                System.out.println("Missing Naufil Image: " + e);
+                System.out.println("Missing Callum Image: " + e);
             }
             isInitialized = true;
         }
 
-        if (jumpCount != 0) {
-            current = jump;
-        } else {
-            current = neutral;
-        }
+        updateDirection();
+        updateState();
 
         if (lookingDirection) {
             g2d.drawImage(current, x + current.getWidth(), y, -current.getWidth(), current.getHeight(), null); //mirrored, look right
@@ -37,6 +39,5 @@ public class Callum extends Character{
         }
         move();
 //        collide();
-        updateDirection();
     }
 }

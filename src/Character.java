@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public abstract class Character {
     protected boolean left = false, right = false;
@@ -9,6 +10,9 @@ public abstract class Character {
     protected boolean lookingDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
     protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = special
+    protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special, spit1, spit2;
+    protected BufferedImage current;
+    private long markerFrame = 0;
 
     public int getX() {
         return x;
@@ -24,8 +28,51 @@ public abstract class Character {
         }
     }
 
-    public void spit(){
+    public void updateState() {
+        if (attackState == 1) {
+            bite();
+        }
+        if (jumpCount != 0 && attackState == 0) {
+            changeImage("jump");
+        } else if (attackState == 0) {
+            changeImage("neutral");
+        }
+    }
 
+    public void changeImage(String str) {
+        switch (str) {
+            case "neutral":
+                current = neutral;
+                break;
+            case "jump":
+                current = jump;
+                break;
+            case "bite1":
+                current = bite1;
+                break;
+            case "bite2":
+                current = bite2;
+                break;
+            default:
+                current = neutral;
+                System.out.println("Image change failed, defaulting to neutral for P" + playerNo);
+                break;
+        }
+    }
+
+    public void bite(){
+        if (attackState != 1){ //initiate attack
+            attackState = 1;
+            markerFrame = Window.getTick();
+            changeImage("bite1");
+        }
+        if (Window.getTick() - markerFrame == 50) { //actual bite 10 frames later
+            changeImage("bite2");
+            //add damage/hitbox calculation
+        }
+        if (Window.getTick() - markerFrame == 80) {
+            attackState = 0;
+        }
     }
 
     public void updateDirection() {
@@ -50,6 +97,9 @@ public abstract class Character {
                     yv = 30;
                 }
             }
+            if (e.getKeyCode() == KeyEvent.VK_M){
+                bite();
+            }
         } else {
             if (e.getKeyCode() == KeyEvent.VK_LEFT){
                 left = true;
@@ -62,6 +112,9 @@ public abstract class Character {
                     jumpCount++;
                     yv = 30;
                 }
+            }
+            if (e.getKeyCode() == KeyEvent.VK_3) {
+                bite();
             }
         }
 
