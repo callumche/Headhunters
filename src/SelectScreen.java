@@ -108,7 +108,6 @@ public class SelectScreen {
             if (startState == 1 && Window.getPlayerOneSelect() != pTwoSelect) {
                 Window.setPlayerTwoSelect(pTwoSelect);
                 twoDone = true;
-                System.out.println("two done!");
             }
         }
 
@@ -116,10 +115,8 @@ public class SelectScreen {
             if (!oneDone) {
                 if (pOneSelect!=0) {
                     pOneSelect--;
-                    System.out.println("P1 moving left");
                 } else {
                     pOneSelect = 2;
-                    System.out.println("P1 moving left");
                 }
             }
         }
@@ -136,10 +133,8 @@ public class SelectScreen {
             if (!twoDone) {
                 if (pTwoSelect != 0) {
                     pTwoSelect--;
-                    System.out.println("P2 moving left");
                 } else {
                     pTwoSelect = 2;
-                    System.out.println("P2 moving left");
                 }
             }
         }
