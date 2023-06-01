@@ -3,21 +3,24 @@ import java.awt.event.KeyEvent;
 
 public abstract class Character {
     protected boolean left = false, right = false;
-    protected int x = 480;
-    protected int y = 300;
-    protected double xv = 0;
-    protected double yv = 0;
-    protected double xa = 0;
-    protected double ya = -1.5;
-    protected int speedCap = 20;
-    protected int jumpCount = 0;
+    protected int x = 480, y = 300;
+    protected double xv = 0, yv = 0, xa = 0, ya = 0;
+    protected int speedCap = 20, jumpCount = 0;
     protected boolean lookingDirection = true; //false = left, true = right
-    boolean playerNo; //true = P1, false = P2
+    protected boolean playerNo; //true = P1, false = P2
+    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = special
+
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
 
     public Character (boolean p) {
         playerNo = p;
         if (!p) {
-            x = 1440;
+            x = 1240;
         }
     }
 
@@ -78,7 +81,6 @@ public abstract class Character {
 
     }
 
-
     public void move() {
         //understand that this can be hardcoded directly to +/- to speed, but doing xa for clarity
         if (left && right) {
@@ -118,7 +120,7 @@ public abstract class Character {
             xv = -0.75 * xv; //bounce inelastically when you hit the border
             //System.out.println("right bounce");
         } else if (x < 0) {
-            x = 1;
+            x = 0;
             xv = -0.75 * xv;
             //System.out.println("left bounce");
         }
@@ -127,7 +129,7 @@ public abstract class Character {
         if (y > Window.resY - 50 - 200) { //height of windows bar ~= 50px
             y = Window.resY - 50 - 200;
             ya = 0;
-            yv = -0.4 * yv;
+            yv = -0.3 * yv;
             if (yv <= 4) {
                 jumpCount = 0;
                 yv = 0;
@@ -139,32 +141,61 @@ public abstract class Character {
             yv = -0.5 * yv;
             //System.out.println("top bounce");
         }
-        if (y >= Window.resY - 55 - 200) {
-            friction();
+        if (y >= Window.resY - 55 - 200) { //friction, constantly decelerating at 0.1
+            if (xv > 0.5) {
+                xv -= 1;
+            } else if (xv < -0.5) {
+                xv += 1;
+            } else {
+                xv = 0;
+            }
+            if (yv > 0.5) {
+                yv -= 0.50;
+            } else if (yv < -0.5) {
+                yv += 0.50;
+            } else {
+                yv = 0;
+            }
         }
-        //friction, constantly decelerating at 0.1
+
     }
 
-    public void friction(){
-        if (xv > 0.5) {
-            xv -= 0.50;
-        } else if (xv < -0.5) {
-            xv += 0.50;
-        } else {
-            xv = 0;
+    /*public void collide() {
+        if (playerNo) { //if P1
+            int dx = Window.p2.getX() - x;
+            int dy = Window.p2.getY() - y;
+            double distance = Math.sqrt(dx * dx + dy * dy); //dist b/w centers, ALWAYS POSITIVE
+            boolean p2IsToRight = dx < 0;
+            //IF DX IS NEGATIVE, P2 IS TO THE RIGHT OF P1
+            if (distance <= 200 && p2IsToRight) { //P2 is to the right
+                xv = xv * -0.25;
+                x += 5;
+                System.out.println("Moving right!");
+            } else if (distance <= 200) { //P2 is to the left
+                xv = xv * -0.25;
+                x -= 5;
+                System.out.println("Moving left!");
+            }
         }
-        if (yv > 0.5) {
-            yv -= 0.50;
-        } else if (yv < -0.5) {
-            yv += 0.50;
-        } else {
-            yv = 0;
+        if (!playerNo) { //if P2
+            int dx = Window.p1.getX() - x;
+            int dy = Window.p1.getY() - y;
+            double distance = Math.sqrt(dx * dx + dy * dy); //dist b/w centers, ALWAYS POSITIVE
+            boolean p1IsToRight = dx < 0;
+            //IF DX IS NEGATIVE, P1 IS TO THE RIGHT OF P2
+            if (distance <= 200 && p1IsToRight) { //P2 is to the right
+                xv = xv * -0.25;
+                x += 5;
+                System.out.println("P2 Moving right!");
+            } else if (distance <= 200) { //P2 is to the left
+                xv = xv * -0.25;
+                x -= 5;
+                System.out.println("P2 Moving left!");
+            }
         }
-    }
+    }*/
 
     public void paint (Graphics2D g2d) { //holding out temporarily
         move();
     }
-
-
 }

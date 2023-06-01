@@ -11,8 +11,8 @@ public class Window extends JPanel {
     private static long globalTick = 0;
     private static boolean isStarting = true;
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
-    private static Character p1 = null;
-    private static Character p2 = null;
+    static Character p1 = null;
+    static Character p2 = null;
 
     public Window(){
         addKeyListener(new KeyListener() {
