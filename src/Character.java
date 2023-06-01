@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 
 public abstract class Character {
     protected boolean left = false, right = false;
-    protected int x = 600;
+    protected int x = 480;
     protected int y = 300;
     protected double xv = 0;
     protected double yv = 0;
@@ -12,6 +12,14 @@ public abstract class Character {
     protected int speedCap = 20;
     protected int jumpCount = 0;
     protected boolean lookingDirection = true; //false = left, true = right
+    boolean playerNo; //true = P1, false = P2
+
+    public Character (boolean p) {
+        playerNo = p;
+        if (p) {
+            x = 1440;
+        }
+    }
 
     public void updateDirection() {
         if (xv < 0) {
@@ -24,9 +32,11 @@ public abstract class Character {
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_A){
             left = true;
+            System.out.println("Laeft input!");
         }
         if (e.getKeyCode() == KeyEvent.VK_D){
             right = true;
+            System.out.println("Right input!");
         }
         if (e.getKeyCode() == KeyEvent.VK_W){
             if (jumpCount < 2) {
@@ -38,10 +48,11 @@ public abstract class Character {
     public void keyReleased(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_A){
             left = false;
+            System.out.println("left stopped!");
         }
         if (e.getKeyCode() == KeyEvent.VK_D){
             right = false;
-            xa = 0;
+            System.out.println("left stopped!");
         }
     }
 

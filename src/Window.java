@@ -5,13 +5,14 @@ import java.awt.event.KeyListener;
 
 
 public class Window extends JPanel {
-    Naufil n1 = new Naufil();
     SelectScreen startMenu = new SelectScreen();
     public static final int resX = 1920, resY = 1080;
     private int stage = 0;
     private static long globalTick = 0;
     private static boolean isStarting = true;
     private static int playerOneSelect = 4, playerTwoSelect = 4;
+    private static Character p1 = null;
+    private static Character p2 = null;
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -20,15 +21,46 @@ public class Window extends JPanel {
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                n1.keyReleased(e);
-            } //problem: have to know what classes to send keypresses to
+                if (!isStarting) {
+                    p1.keyReleased(e);
+                    p2.keyReleased(e);
+                }
+            }
             @Override
             public void keyPressed(KeyEvent e) {
                 startMenu.keyPressed(e);
-                n1.keyPressed(e);
+                if (!isStarting) {
+                    p1.keyPressed(e);
+                    p2.keyPressed(e);
+                }
             }
         });
         setFocusable(true);
+    }
+
+    public static void init() {
+        switch (playerOneSelect) {
+            case 0:
+                p1 = new Julian(true);
+                break;
+            case 1:
+                p1 = new Callum(true);
+                break;
+            case 2:
+                p1 = new Naufil(true);
+                break;
+        }
+        switch (playerTwoSelect) {
+            case 0:
+                p2 = new Julian(false);
+                break;
+            case 1:
+                p2 = new Callum(false);
+                break;
+            case 2:
+                p2 = new Naufil(false);
+                break;
+        }
     }
 
     public static void setPlayerOneSelect(int n){
@@ -60,7 +92,8 @@ public class Window extends JPanel {
         if (isStarting) {
             startMenu.paint(g2d);
         } else {
-            n1.paint(g2d);
+            p1.paint(g2d);
+            p2.paint(g2d);
         }
     }
 
