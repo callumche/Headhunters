@@ -55,7 +55,7 @@ public class SelectScreen {
                 g2d.setColor(Color.MAGENTA);
                 g2d.drawRect(370 + pOneSelect * 400, 320, 360, 400); // IF BOTH ARE MOUSING OVER SAME
             } else {
-                g2d.setColor(Color.BLUE);
+                g2d.setColor(Color.RED);
                 if (!oneDone) {
                     g2d.setStroke(new BasicStroke(10));
                     g2d.drawRect(370 + pOneSelect * 400, 320, 360, 400);
@@ -63,7 +63,7 @@ public class SelectScreen {
                     g2d.setStroke(new BasicStroke(20));
                     g2d.drawRect(370 + pOneSelect * 400, 320, 360, 400);
                 }
-                g2d.setColor(Color.RED);
+                g2d.setColor(Color.BLUE);
                 if (!twoDone) {
                     g2d.setStroke(new BasicStroke(10));
                     g2d.drawRect(370 + pTwoSelect * 400, 320, 360, 400);
