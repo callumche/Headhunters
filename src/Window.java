@@ -13,6 +13,8 @@ public class Window extends JPanel {
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
     static Character p1 = null;
     static Character p2 = null;
+    private static double distance;
+    private static boolean position = true; //true = P2 to right of P1, false = P2 to left
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -36,6 +38,25 @@ public class Window extends JPanel {
             }
         });
         setFocusable(true);
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+    public boolean getPosition() {
+        return position;
+    }
+
+    public boolean isHit(boolean caller) { //true = P1, false = P2
+        if (caller) { //P1 is attacking
+            if (p1.getDirection()) {//if right
+                return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && position);
+            } else {
+                return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && !position);
+            }
+
+        }
+        return false;
     }
 
     public static void init() {
@@ -95,6 +116,8 @@ public class Window extends JPanel {
         if (isStarting) {
             startMenu.paint(g2d);
         } else {
+            distance = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+            position = p2.x > p1.x;
             p1.paint(g2d);
             p2.paint(g2d);
         }

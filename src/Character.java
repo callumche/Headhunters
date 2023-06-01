@@ -4,28 +4,42 @@ import java.awt.image.BufferedImage;
 
 public abstract class Character {
     protected boolean left = false, right = false;
-    protected int x = 480, y = 300;
-    protected double xv = 0, yv = 0, xa = 0, ya = 0;
+    public int x = 480, y = 300;
+    public double xv = 0, yv = 0, xa = 0, ya = 0; //fuck you, im making this public (i don't want a trillion getters/setters) - FIX LATER?
     protected int speedCap = 20, jumpCount = 0;
     protected boolean lookingDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
-    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = special
+    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = special, 4 = hurt
     protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special, spit1, spit2;
     protected BufferedImage current;
     private long markerFrame = 0;
+    protected int health = 100;
 
-    public int getX() {
+    public boolean getDirection() {
+        return lookingDirection;
+    }
+    /*public int getX() { unneeded getter/setters
         return x;
+    }
+    public void setX(int newX){
+        x = newX;
     }
     public int getY() {
         return y;
     }
+    public void setY(int newY){
+        y = newY;
+    }*/
 
     public Character (boolean p) {
         playerNo = p;
         if (!p) {
             x = 1240;
         }
+    }
+
+    public void applyDamage(int dam) {
+        health -= dam;
     }
 
     public void updateState() {
@@ -66,8 +80,24 @@ public abstract class Character {
             markerFrame = Window.getTick();
             changeImage("bite1");
         }
-        if (Window.getTick() - markerFrame == 50) { //actual bite 10 frames later
+        if (Window.getTick() - markerFrame == 50) { //actual bite 50 frames later
             changeImage("bite2");
+            if (playerNo) { //this nest is hurting me send help
+                if (getDirection()) {
+                   // if (Window.p2.xv)
+                }
+                if (Window.p2.xv >= 10 || Window.p2.xv <= -10) { //knockback
+                    Window.p2.xv *= -1;
+                } else {
+                    if (getDirection()) {
+                        Window.p2.xv = 20;
+                        Window.p2.yv = 10;
+                    } else {
+                        Window.p2.xv = -10;
+                        Window.p2.yv = 20;
+                    }
+                }
+            }
             //add damage/hitbox calculation
         }
         if (Window.getTick() - markerFrame == 80) {
