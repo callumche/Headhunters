@@ -30,30 +30,52 @@ public abstract class Character {
     }
 
     public void keyPressed(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_A){
-            left = true;
-            System.out.println("Laeft input!");
-        }
-        if (e.getKeyCode() == KeyEvent.VK_D){
-            right = true;
-            System.out.println("Right input!");
-        }
-        if (e.getKeyCode() == KeyEvent.VK_W){
-            if (jumpCount < 2) {
-                jumpCount++;
-                yv = 30;
+        if (playerNo) { //P1, WASD
+            if (e.getKeyCode() == KeyEvent.VK_A){
+                left = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D){
+                right = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W){
+                if (jumpCount < 2) {
+                    jumpCount++;
+                    yv = 30;
+                }
+            }
+        } else {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT){
+                left = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+                right = true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP){
+                if (jumpCount < 2) {
+                    jumpCount++;
+                    yv = 30;
+                }
             }
         }
+
     }
     public void keyReleased(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_A){
-            left = false;
-            System.out.println("left stopped!");
+        if (playerNo) { //if Player 1 (WASD)
+            if (e.getKeyCode() == KeyEvent.VK_A){
+                left = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D){
+                right = false;
+            }
+        } else {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT){
+                left = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+                right = false;
+            }
         }
-        if (e.getKeyCode() == KeyEvent.VK_D){
-            right = false;
-            System.out.println("left stopped!");
-        }
+
     }
 
 
