@@ -88,6 +88,7 @@ public class SelectScreen {
             if (Window.getPlayerOneSelect() < 3 && Window.getPlayerTwoSelect() < 3) {
                 startState++;
                 pOneSelect = 0;
+                Window.init(); //Load player selections into main class
             }
         }
 
