@@ -16,7 +16,7 @@ public abstract class Character {
 
     public Character (boolean p) {
         playerNo = p;
-        if (p) {
+        if (!p) {
             x = 1440;
         }
     }
