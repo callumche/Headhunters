@@ -7,10 +7,10 @@ import java.io.*;
 public class SelectScreen {
     private int startState = 0; //converted boolean into start phase (0 = splash, 1 = char 1 select, 2 = char 2 select, 3 = arena select, 4 = scrum
     private boolean isInitialized = false;
-    private BufferedImage splash = null, julian = null, callum = null, naufil = null;
+    private BufferedImage splash = null, julian = null, callum = null, naufil = null, sun = null, moon = null, einstein = null;
     private Font f = null;
-    private int pOneSelect = 0, pTwoSelect = 2;
-    private boolean oneDone = false, twoDone = false;
+    private int pOneSelect = 0, pTwoSelect = 2, arenaSelectNum = 0;
+    private boolean oneDone = false, twoDone = false, arenaSelected = false;
 
 
     public void init() {
@@ -20,6 +20,9 @@ public class SelectScreen {
             julian = ImageIO.read(new File("res\\Processed Shots\\JulianSelect.PNG"));
             callum = ImageIO.read(new File("res\\Processed Shots\\CallumSelect.PNG"));
             naufil = ImageIO.read(new File("res\\Processed Shots\\NaufilSelect.PNG"));
+            sun = ImageIO.read(new File("res\\Arena Logos\\Sun.png"));
+            moon = ImageIO.read(new File("res\\Arena Logos\\Moon.png"));
+            einstein = ImageIO.read(new File("res\\Arena Logos\\Einstein.png"));
         } catch (IOException e) {
             System.out.println("Missing Loading Screen Image: " + e);
         }
@@ -89,7 +92,12 @@ public class SelectScreen {
         }
 
         if (startState == 2) { //arena select
-            
+            g2d.setColor(Color.RED);
+            g2d.fillRect(arenaSelectNum*430 + 310,310,420,420);
+            g2d.drawImage(sun, 320, 320,400,400,null);
+            g2d.drawImage(moon, 750, 320,400,400, null);
+            g2d.drawImage(einstein, 1180, 320,400,400, null);
+
         }
     }
 
@@ -101,6 +109,7 @@ public class SelectScreen {
                 Window.setPlayerOneSelect(pOneSelect);
                 oneDone = true;
             } else if (startState == 2) {
+                //pass arenaSelectNum to the window class
                 startState++;
             }
         }
@@ -119,6 +128,13 @@ public class SelectScreen {
                     pOneSelect = 2;
                 }
             }
+            if (oneDone && twoDone && !arenaSelected){
+                if (arenaSelectNum!=0){
+                    arenaSelectNum--;
+                } else {
+                    arenaSelectNum = 2;
+                }
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             if (!oneDone) {
@@ -126,6 +142,13 @@ public class SelectScreen {
                     pOneSelect++;
                 } else {
                     pOneSelect = 0;
+                }
+            }
+            if (oneDone && twoDone && !arenaSelected){
+                if (arenaSelectNum!=2){
+                    arenaSelectNum++;
+                } else {
+                    arenaSelectNum = 0;
                 }
             }
         }
