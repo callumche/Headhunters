@@ -48,6 +48,9 @@ public abstract class Character {
         if (attackState == 1) {
             bite();
         }
+        if (attackState == 4) {
+            hurt();
+        }
         if (jumpCount != 0 && attackState == 0) {
             changeImage("jump");
         } else if (attackState == 0) {
@@ -69,6 +72,9 @@ public abstract class Character {
             case "bite2":
                 current = bite2;
                 break;
+            case "hurt":
+                current = hurt;
+                break;
             default:
                 current = neutral;
                 System.out.println("Image change failed, defaulting to neutral for P" + playerNo);
@@ -82,7 +88,7 @@ public abstract class Character {
             markerFrame = Window.getTick();
             changeImage("bite1");
         }
-        if (Window.getTick() - markerFrame == 50) { //actual bite 50 frames later
+        if (Window.getTick() - markerFrame == 30) { //actual bite 30 frames later
             changeImage("bite2");
             if (playerNo) { //this nest is hurting me send help
                 if (Window.isHit(playerNo)) {
@@ -93,7 +99,7 @@ public abstract class Character {
                             Window.p2.xv = -20;
                             Window.p2.yv = 10;
                         }
-                    Window.p2.applyDamage(40); //damage
+                    Window.p2.applyDamage(30); //damage
                 }
             } else {
                 if (Window.isHit(playerNo)) {
@@ -104,12 +110,24 @@ public abstract class Character {
                         Window.p1.xv = -20;
                         Window.p1.yv = 10;
                     }
-                    Window.p1.applyDamage(40); //damage
+                    Window.p1.applyDamage(30); //damage
                 }
             }
         }
-        if (Window.getTick() - markerFrame == 80) {
+        if (Window.getTick() - markerFrame == 50) {
             attackState = 0;
+        }
+    }
+
+    public void hurt() {
+        if (attackState != 4) {
+            attackState = 4;
+            markerFrame = Window.getTick();
+            changeImage("hurt");
+        }
+        if (Window.getTick() - markerFrame == 20) {
+            attackState = 0;
+            changeImage("neutral");
         }
     }
 
