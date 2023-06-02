@@ -16,6 +16,8 @@ public class HealthBar {
                 g2d.fillRect(9,10,802,40);
                 g2d.setColor(Color.RED);
                 g2d.fillRect(10,11,800,38);
+                Window.setWinner(false);
+                Window.setFinished();
             } else {
                 g2d.fillRect(9, 10, 802, 40);
                 g2d.setColor(Color.GREEN);
@@ -29,6 +31,8 @@ public class HealthBar {
                 g2d.fillRect(1099,10,802,40);
                 g2d.setColor(Color.RED);
                 g2d.fillRect(1100,11,800,38);
+                Window.setWinner(true);
+                Window.setFinished();
             } else {
                 g2d.fillRect(1099, 10, 802, 40);
                 g2d.setColor(Color.GREEN);
