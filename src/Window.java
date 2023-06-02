@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 
 public class Window extends JPanel {
     SelectScreen startMenu = new SelectScreen();
+    WinScreen winS = new WinScreen();
     public static final int resX = 1920, resY = 1080;
     private int stage = 0;
     private static long globalTick = 0;
@@ -17,7 +18,7 @@ public class Window extends JPanel {
     static HealthBar hb2;
     private static double distance;
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
-
+    private static boolean finished = false, p1Winner = true;
     public Window(){
         addKeyListener(new KeyListener() {
             @Override
@@ -45,13 +46,15 @@ public class Window extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         if (isStarting) {
             startMenu.paint(g2d);
-        } else {
+        } else if (!finished){
             distance = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
             position = p2.x > p1.x;
             p1.paint(g2d);
             p2.paint(g2d);
             hb1.paint(g2d);
             hb2.paint(g2d);
+        } else {
+            winS.paint(g2d);
         }
     }
 
@@ -105,7 +108,9 @@ public class Window extends JPanel {
                 break;
         }
     }
-
+    public static boolean getWinner(){return p1Winner;}
+    public static void setWinner(Boolean bool){p1Winner = bool;}
+    public static void setFinished(){ finished = true;}
     public static void setPlayerOneSelect(int n){
         playerOneSelect = n;
     }
