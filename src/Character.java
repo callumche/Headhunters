@@ -149,7 +149,7 @@ public abstract class Character {
                     yv = 30;
                 }
             }
-            if (e.getKeyCode() == KeyEvent.VK_3) {
+            if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
                 bite();
             }
         }
