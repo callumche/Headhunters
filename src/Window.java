@@ -13,6 +13,8 @@ public class Window extends JPanel {
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
     static Character p1 = null;
     static Character p2 = null;
+    static HealthBar hb1;
+    static HealthBar hb2;
     private static double distance;
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
 
@@ -39,6 +41,19 @@ public class Window extends JPanel {
         });
         setFocusable(true);
     }
+    public void paint(Graphics g){
+        Graphics2D g2d = (Graphics2D) g;
+        if (isStarting) {
+            startMenu.paint(g2d);
+        } else {
+            distance = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+            position = p2.x > p1.x;
+            p1.paint(g2d);
+            p2.paint(g2d);
+            hb1.paint(g2d);
+            hb2.paint(g2d);
+        }
+    }
 
     public double getDistance() {
         return distance;
@@ -64,6 +79,8 @@ public class Window extends JPanel {
     }
 
     public static void init() {
+        hb1 = new HealthBar(true);
+        hb2 = new HealthBar(false);
         switch (playerOneSelect) {
             case 0:
                 p1 = new Julian(true);
@@ -114,19 +131,6 @@ public class Window extends JPanel {
     public void setStage(int n) {
         stage = n;
     }
-
-    public void paint(Graphics g){
-        Graphics2D g2d = (Graphics2D) g;
-        if (isStarting) {
-            startMenu.paint(g2d);
-        } else {
-            distance = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
-            position = p2.x > p1.x;
-            p1.paint(g2d);
-            p2.paint(g2d);
-        }
-    }
-
     public static long getTick() {
         return globalTick;
     }

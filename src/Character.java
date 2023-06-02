@@ -41,7 +41,9 @@ public abstract class Character {
     public void applyDamage(int dam) {
         health -= dam;
     }
-
+    public int getHealth(){
+        return health;
+    }
     public void updateState() {
         if (attackState == 1) {
             bite();
