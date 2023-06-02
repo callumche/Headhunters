@@ -83,22 +83,28 @@ public abstract class Character {
         if (Window.getTick() - markerFrame == 50) { //actual bite 50 frames later
             changeImage("bite2");
             if (playerNo) { //this nest is hurting me send help
-                if (getDirection()) {
-                   // if (Window.p2.xv)
+                if (Window.isHit(playerNo)) {
+                        if (getDirection()) { //knockback
+                            Window.p2.xv = 20;
+                            Window.p2.yv = 10;
+                        } else {
+                            Window.p2.xv = -20;
+                            Window.p2.yv = 10;
+                        }
+                    Window.p2.applyDamage(40); //damage
                 }
-                if (Window.p2.xv >= 10 || Window.p2.xv <= -10) { //knockback
-                    Window.p2.xv *= -1;
-                } else {
-                    if (getDirection()) {
-                        Window.p2.xv = 20;
-                        Window.p2.yv = 10;
+            } else {
+                if (Window.isHit(playerNo)) {
+                    if (getDirection()) { //knockback
+                        Window.p1.xv = 20;
+                        Window.p1.yv = 10;
                     } else {
-                        Window.p2.xv = -10;
-                        Window.p2.yv = 20;
+                        Window.p1.xv = -20;
+                        Window.p1.yv = 10;
                     }
+                    Window.p1.applyDamage(40); //damage
                 }
             }
-            //add damage/hitbox calculation
         }
         if (Window.getTick() - markerFrame == 80) {
             attackState = 0;
