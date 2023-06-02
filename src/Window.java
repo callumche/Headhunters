@@ -64,18 +64,19 @@ public class Window extends JPanel {
 
     public static boolean isHit(boolean caller) { //true = P1, false = P2
         if (caller) { //P1 is attacking
-            if (p1.getDirection()) {//if P1 is facing right
+            if (p1.getDirection() && p2.getState() != 4) {//if P1 is facing right
                 return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && position);
-            } else {
+            } else if (p1.getState() != 4) {
                 return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && !position);
             }
         } else {
-            if (p2.getDirection()) {//if right
+            if (p2.getDirection() && p1.getState() != 4) {//if right
                 return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && !position);
-            } else {
+            } else if (p1.getState() != 4) {
                 return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && position);
             }
         }
+        return false;
     }
 
     public static void init() {

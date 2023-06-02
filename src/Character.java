@@ -7,13 +7,20 @@ public abstract class Character {
     public int x = 480, y = 300;
     public double xv = 0, yv = 0, xa = 0, ya = 0; //fuck you, im making this public (i don't want a trillion getters/setters) - FIX LATER?
     protected int speedCap = 20, jumpCount = 0;
-    protected boolean lookingDirection = true; //false = left, true = right
+    protected boolean lookingDirection = true, hurtDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
-    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = special, 4 = hurt
+    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = headbutt, 4 = hurt, 5 = special
     protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special, spit1, spit2;
     protected BufferedImage current;
     private long markerFrame = 0;
     protected int health = 100;
+
+    public int getState() {
+        return attackState;
+    }
+
+//    IDEA: Make separate combo tick that decreases damage, to discourage move spamming
+//    not even if it lands, just spamming decreases your damage output (by multiplier added to applyDamage();
 
     public boolean getDirection() {
         return lookingDirection;
@@ -48,6 +55,9 @@ public abstract class Character {
         if (attackState == 1) {
             bite();
         }
+        if (attackState == 3) {
+            headbutt();
+        }
         if (attackState == 4) {
             hurt();
         }
@@ -75,10 +85,51 @@ public abstract class Character {
             case "hurt":
                 current = hurt;
                 break;
+            case "headbutt":
+                current = headbutt;
+                break;
             default:
-                current = neutral;
+                current = null;
                 System.out.println("Image change failed, defaulting to neutral for P" + playerNo);
                 break;
+        }
+    }
+
+    public void headbutt(){
+        if (attackState != 3) {
+            attackState = 3;
+            markerFrame = Window.getTick();
+        }
+        if (Window.getTick() - markerFrame == 5) {
+            changeImage("headbutt");
+            if (playerNo) { //this nest is hurting me send help
+                if (Window.isHit(playerNo)) {
+                    if (getDirection()) { //knockback
+                        Window.p2.xv = 10;
+                        Window.p2.yv = 5;
+                    } else {
+                        Window.p2.xv = -10;
+                        Window.p2.yv = 5;
+                    }
+                    Window.p2.applyDamage(5); //damage
+                    Window.p2.hurt();
+                }
+            } else {
+                if (Window.isHit(playerNo)) {
+                    if (getDirection()) { //knockback
+                        Window.p1.xv = 10;
+                        Window.p1.yv = 5;
+                    } else {
+                        Window.p1.xv = -10;
+                        Window.p1.yv = 5;
+                    }
+                    Window.p1.applyDamage(5); //damage
+                    Window.p1.hurt();
+                }
+            }
+        }
+        if (Window.getTick() - markerFrame == 15) {
+            attackState = 0;
         }
     }
 
@@ -99,7 +150,8 @@ public abstract class Character {
                             Window.p2.xv = -20;
                             Window.p2.yv = 10;
                         }
-                    Window.p2.applyDamage(30); //damage
+                    Window.p2.applyDamage(20); //damage
+                    Window.p2.hurt();
                 }
             } else {
                 if (Window.isHit(playerNo)) {
@@ -110,7 +162,8 @@ public abstract class Character {
                         Window.p1.xv = -20;
                         Window.p1.yv = 10;
                     }
-                    Window.p1.applyDamage(30); //damage
+                    Window.p1.applyDamage(20); //damage
+                    Window.p1.hurt();
                 }
             }
         }
@@ -124,7 +177,11 @@ public abstract class Character {
             attackState = 4;
             markerFrame = Window.getTick();
             changeImage("hurt");
+            hurtDirection = lookingDirection;
         }
+        left = false;
+        right = false;
+        lookingDirection = hurtDirection;
         if (Window.getTick() - markerFrame == 20) {
             attackState = 0;
             changeImage("neutral");
@@ -140,14 +197,14 @@ public abstract class Character {
     }
 
     public void keyPressed(KeyEvent e){
-        if (playerNo) { //P1, WASD
-            if (e.getKeyCode() == KeyEvent.VK_A){
+        if (playerNo && attackState != 4) { //P1, WASD
+            if (e.getKeyCode() == KeyEvent.VK_A) {
                 left = true;
             }
-            if (e.getKeyCode() == KeyEvent.VK_D){
+            if (e.getKeyCode() == KeyEvent.VK_D) {
                 right = true;
             }
-            if (e.getKeyCode() == KeyEvent.VK_W){
+            if (e.getKeyCode() == KeyEvent.VK_W) {
                 if (jumpCount < 2) {
                     jumpCount++;
                     yv = 30;
@@ -156,7 +213,10 @@ public abstract class Character {
             if (e.getKeyCode() == KeyEvent.VK_M){
                 bite();
             }
-        } else {
+            if (e.getKeyCode() == KeyEvent.VK_B) {
+                headbutt();
+            }
+        } else if (attackState != 4) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT){
                 left = true;
             }
@@ -169,8 +229,11 @@ public abstract class Character {
                     yv = 30;
                 }
             }
-            if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
+            if (e.getKeyCode() == KeyEvent.VK_NUMPAD3 || e.getKeyCode() == KeyEvent.VK_SHIFT) {
                 bite();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_NUMPAD1 || e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
+                headbutt();
             }
         }
 
