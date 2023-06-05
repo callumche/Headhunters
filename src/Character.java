@@ -96,7 +96,7 @@ public abstract class Character {
     }
 
     public void headbutt(){
-        if (attackState != 3) {
+        if (attackState == 0) {
             attackState = 3;
             markerFrame = Window.getTick();
         }
@@ -134,7 +134,7 @@ public abstract class Character {
     }
 
     public void bite(){
-        if (attackState != 1){ //initiate attack
+        if (attackState == 0){ //initiate attack
             attackState = 1;
             markerFrame = Window.getTick();
             changeImage("bite1");
