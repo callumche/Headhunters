@@ -7,8 +7,8 @@ import java.awt.event.KeyListener;
 public class Window extends JPanel {
     SelectScreen startMenu = new SelectScreen();
     WinScreen winS = new WinScreen();
+    Arena arena = new Arena();
     public static final int resX = 1920, resY = 1080;
-    private int stage = 0;
     private static long globalTick = 0;
     private static boolean isStarting = true;
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
@@ -49,6 +49,7 @@ public class Window extends JPanel {
         } else if (!finished){
             distance = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
             position = p2.x > p1.x;
+            arena.paint(g2d);
             p1.paint(g2d);
             p2.paint(g2d);
             hb1.paint(g2d);
@@ -126,16 +127,9 @@ public class Window extends JPanel {
     public static void setArenaSelect(int s){
         arenaSelect = s;
     }
+    public static int getArenaSelect(){return arenaSelect;}
     public static void endStart() {
         isStarting = false;
-    }
-
-    public int getStage() {
-        return stage;
-    }
-
-    public void setStage(int n) {
-        stage = n;
     }
     public static long getTick() {
         return globalTick;
