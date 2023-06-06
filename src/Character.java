@@ -179,10 +179,8 @@ public abstract class Character {
             changeImage("hurt");
             hurtDirection = lookingDirection;
         }
-        left = false;
-        right = false;
         lookingDirection = hurtDirection;
-        if (Window.getTick() - markerFrame == 20) {
+        if (Window.getTick() - markerFrame >= 20) {
             attackState = 0;
             changeImage("neutral");
         }

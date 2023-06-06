@@ -73,15 +73,15 @@ public class Window extends JPanel {
     public static boolean isHit(boolean caller) { //true = P1, false = P2
         if (caller) { //P1 is attacking
             if (p1.getDirection() && p2.getState() != 4) {//if P1 is facing right
-                return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && position);
+                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && position);
             } else if (p1.getState() != 4) {
-                return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && !position);
+                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && !position);
             }
         } else {
             if (p2.getDirection() && p1.getState() != 4) {//if right
-                return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && !position);
+                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && !position);
             } else if (p1.getState() != 4) {
-                return (distance <= 210 && Math.abs(p2.y - p1.y) < 50 && position);
+                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && position);
             }
         }
         return false;
@@ -115,13 +115,13 @@ public class Window extends JPanel {
     }
 
     public void collide() {
-        if (distance < 210) {
+        if (distance < 220) {
             if (position) {
-                p1.x -= 25;
-                p2.x += 25;
+                p1.x -= p1.xv - 1;
+                p2.x += p2.xv + 1;
             } else {
-                p1.x += 25;
-                p2.x -= 25;
+                p1.x += p1.xv + 1;
+                p2.x -= p2.xv - 1;
             }
 
         }
