@@ -10,7 +10,7 @@ public class Arena {
     public void paint(Graphics2D g2d){
         arena = Window.getArenaSelect();
         if (arena==0){
-            g2d.setColor(Color.yellow); //add pictures later
+            g2d.setColor(Color.cyan); //add pictures later
         } else if (arena == 1){
             g2d.setColor(Color.darkGray); //add pictures later
         } else {
@@ -20,7 +20,15 @@ public class Arena {
 
         if (arena == 0) {
 
+            g2d.setColor(Color.yellow);
+            g2d.fillOval(100, 200, 300, 300);
 
+            g2d.setColor(Color.green);
+            for (int i = 0; i <= Window.resX; i += 15) {
+
+                g2d.fillRect(i, 950, 5, 150);
+
+            }
 
         } else if (arena == 1) {
 
