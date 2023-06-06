@@ -336,41 +336,6 @@ public abstract class Character {
 
     }
 
-    /*public void collide() {
-        if (playerNo) { //if P1
-            int dx = Window.p2.getX() - x;
-            int dy = Window.p2.getY() - y;
-            double distance = Math.sqrt(dx * dx + dy * dy); //dist b/w centers, ALWAYS POSITIVE
-            boolean p2IsToRight = dx < 0;
-            //IF DX IS NEGATIVE, P2 IS TO THE RIGHT OF P1
-            if (distance <= 200 && p2IsToRight) { //P2 is to the right
-                xv = xv * -0.25;
-                x += 5;
-                System.out.println("Moving right!");
-            } else if (distance <= 200) { //P2 is to the left
-                xv = xv * -0.25;
-                x -= 5;
-                System.out.println("Moving left!");
-            }
-        }
-        if (!playerNo) { //if P2
-            int dx = Window.p1.getX() - x;
-            int dy = Window.p1.getY() - y;
-            double distance = Math.sqrt(dx * dx + dy * dy); //dist b/w centers, ALWAYS POSITIVE
-            boolean p1IsToRight = dx < 0;
-            //IF DX IS NEGATIVE, P1 IS TO THE RIGHT OF P2
-            if (distance <= 200 && p1IsToRight) { //P2 is to the right
-                xv = xv * -0.25;
-                x += 5;
-                System.out.println("P2 Moving right!");
-            } else if (distance <= 200) { //P2 is to the left
-                xv = xv * -0.25;
-                x -= 5;
-                System.out.println("P2 Moving left!");
-            }
-        }
-    }*/
-
     public void paint (Graphics2D g2d) { //holding out temporarily
         move();
     }
