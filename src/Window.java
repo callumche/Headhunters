@@ -116,14 +116,16 @@ public class Window extends JPanel {
 
     public void collide() {
         if (distance < 220) {
+            double nextDist = Math.max(p1.xv, p2.xv) - Math.min(p1.xv, p2.xv) / 2;
             if (position) {
-                p1.x -= p1.xv - 1;
-                p2.x += p2.xv + 1;
+                p1.x -= 25 + nextDist;
+                p2.x += 25 - nextDist;
             } else {
-                p1.x += p1.xv + 1;
-                p2.x -= p2.xv - 1;
+                p1.x += 25 - nextDist;
+                p2.x -= 25 + nextDist;
             }
-
+            if (p1.getDirection()) {
+            }
         }
     }
 

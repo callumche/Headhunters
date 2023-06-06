@@ -128,7 +128,7 @@ public abstract class Character {
                 }
             }
         }
-        if (Window.getTick() - markerFrame == 15) {
+        if (Window.getTick() - markerFrame >= 15) {
             attackState = 0;
         }
     }
@@ -167,7 +167,7 @@ public abstract class Character {
                 }
             }
         }
-        if (Window.getTick() - markerFrame == 50) {
+        if (Window.getTick() - markerFrame >= 50) {
             attackState = 0;
         }
     }
