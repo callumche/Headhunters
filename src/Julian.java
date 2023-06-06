@@ -38,6 +38,5 @@ public class Julian extends Character{
             g2d.drawImage(current, x, y, current.getWidth(), current.getHeight(), null);
         }
         move();
-//        collide();
     }
 }

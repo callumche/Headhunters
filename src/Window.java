@@ -42,6 +42,9 @@ public class Window extends JPanel {
         });
         setFocusable(true);
     }
+
+
+
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         if (isStarting) {
@@ -54,6 +57,7 @@ public class Window extends JPanel {
             p2.paint(g2d);
             hb1.paint(g2d);
             hb2.paint(g2d);
+            collide();
         } else {
             winS.paint(g2d);
         }
@@ -109,6 +113,20 @@ public class Window extends JPanel {
                 break;
         }
     }
+
+    public void collide() {
+        if (distance < 210) {
+            if (position) {
+                p1.x -= 25;
+                p2.x += 25;
+            } else {
+                p1.x += 25;
+                p2.x -= 25;
+            }
+
+        }
+    }
+
     public static boolean getWinner(){return p1Winner;}
     public static void setWinner(Boolean bool){p1Winner = bool;}
     public static void setFinished(){ finished = true;}
