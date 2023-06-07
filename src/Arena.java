@@ -3,14 +3,18 @@ import java.awt.*;
 public class Arena {
 
     private int arena;
-
-    Timer timer = new Timer(1000,1000);
+    private boolean isInitialized = false;
     public Arena(){
 
     }
 
     public void paint(Graphics2D g2d){
-        
+
+        if (!isInitialized){
+            Timer timer = new Timer(0,1000);
+            isInitialized = true;
+        }
+
         arena = Window.getArenaSelect();
 
         if (arena == 0) {
@@ -43,5 +47,11 @@ public class Arena {
 
 
         }
+
+        int time = (Helper.checkTime(0,0));
+        g2d.setColor(Color.BLACK);
+        g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
+        g2d.drawString(""+time,1000,30);
+
     }
 }
