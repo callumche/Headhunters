@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 
 public class Window extends JPanel {
@@ -17,6 +18,8 @@ public class Window extends JPanel {
     private static double distance;
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
     private static boolean finished = false, p1Winner = true;
+    public static ArrayList<Spit> spits = new ArrayList<Spit>();
+
     public Window(){
         addKeyListener(new KeyListener() {
             @Override
@@ -56,6 +59,12 @@ public class Window extends JPanel {
             hb1.paint(g2d);
             hb2.paint(g2d);
             collide();
+            if (!spits.isEmpty()) {
+                for (int i = 0; i < spits.size(); i++){
+                    spits.get(i).paint(g2d);
+                }
+            }
+
         } else {
             winS.paint(g2d);
         }

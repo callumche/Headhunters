@@ -22,8 +22,10 @@ public class Spit {
     }
 
     public void ballistic() {
-        x += xv;
-        y += yv;
+        if (x > 0) {
+            x += xv;
+        }
+        y -= yv;
         xv -= 0.5;
         yv -= 0.25;
     }

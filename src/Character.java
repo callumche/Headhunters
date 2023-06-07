@@ -55,6 +55,9 @@ public abstract class Character {
         if (attackState == 1) {
             bite();
         }
+        if (attackState == 2) {
+            spit();
+        }
         if (attackState == 3) {
             headbutt();
         }
@@ -87,6 +90,12 @@ public abstract class Character {
                 break;
             case "headbutt":
                 current = headbutt;
+                break;
+            case "spit1":
+                current = spit1;
+                break;
+            case "spit2":
+                current = spit2;
                 break;
             default:
                 current = null;
@@ -129,6 +138,21 @@ public abstract class Character {
             }
         }
         if (Window.getTick() - markerFrame >= 15) {
+            attackState = 0;
+        }
+    }
+
+    public void spit(){
+        if (attackState == 0) {
+            attackState = 2;
+            markerFrame = Window.getTick();
+            changeImage("spit1");
+        }
+        if (Window.getTick() - markerFrame == 10) {
+            changeImage("spit2");
+            Window.spits.add(new Spit(x, y, lookingDirection, playerNo));
+        }
+        if (Window.getTick() - markerFrame >= 30) {
             attackState = 0;
         }
     }
@@ -214,6 +238,9 @@ public abstract class Character {
             if (e.getKeyCode() == KeyEvent.VK_B) {
                 headbutt();
             }
+            if (e.getKeyCode() == KeyEvent.VK_N) {
+                spit();
+            }
         } else if (attackState != 4) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT){
                 left = true;
@@ -232,6 +259,9 @@ public abstract class Character {
             }
             if (e.getKeyCode() == KeyEvent.VK_NUMPAD1 || e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
                 headbutt();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
+                spit();
             }
         }
 
