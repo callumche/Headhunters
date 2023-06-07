@@ -12,10 +12,8 @@ public class Window extends JPanel {
     private static long globalTick = 0;
     private static boolean isStarting = true;
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
-    static Character p1 = null;
-    static Character p2 = null;
-    static HealthBar hb1;
-    static HealthBar hb2;
+    static Character p1, p2;
+    static HealthBar hb1 , hb2;
     private static double distance;
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
     private static boolean finished = false, p1Winner = true;
@@ -116,7 +114,6 @@ public class Window extends JPanel {
 
     public void collide() {
         double distance = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
-
         if (distance < 200) {
             double overlap = 200 - distance;
             double dx = p2.x - p1.x;
@@ -129,6 +126,8 @@ public class Window extends JPanel {
             p1.y -= shiftY / 2;
             p2.x += shiftX / 2;
             p2.y += shiftY / 2;
+            p1.xv *= 0.5;
+            p2.xv *= 0.5;
         }
     }
 
