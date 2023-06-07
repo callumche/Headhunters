@@ -168,8 +168,8 @@ public class Window extends JPanel {
             p1.y -= shiftY / 2;
             p2.x += shiftX / 2;
             p2.y += shiftY / 2;
-            p1.xv *= 0.5;
-            p2.xv *= 0.5;
+            p1.xv *= 0.75;
+            p2.xv *= 0.75;
         }
     }
 
