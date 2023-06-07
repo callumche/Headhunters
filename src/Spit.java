@@ -40,7 +40,7 @@ public class Spit {
     public void paint(Graphics2D g2d) {
         if (!isInitialized) {
             try {
-                img = ImageIO.read(new File("res\\Sprites\\Spit.PNG"));
+                img = ImageIO.read(new File("res//Sprites//Spit.PNG"));
             } catch (IOException e) {
                 System.out.println("Missing Spit Image: " + e);
             }

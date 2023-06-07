@@ -16,13 +16,13 @@ public class SelectScreen {
     public void init() {
         f = new Font("Comic Sans MS", Font.BOLD, 36);
         try {
-            splash = ImageIO.read(new File("res\\TitleSplash.png"));
-            julian = ImageIO.read(new File("res\\Processed Shots\\JulianSelect.PNG"));
-            callum = ImageIO.read(new File("res\\Processed Shots\\CallumSelect.PNG"));
-            naufil = ImageIO.read(new File("res\\Processed Shots\\NaufilSelect.PNG"));
-            sun = ImageIO.read(new File("res\\Arena Logos\\Sun.png"));
-            moon = ImageIO.read(new File("res\\Arena Logos\\Moon.png"));
-            einstein = ImageIO.read(new File("res\\Arena Logos\\Einstein.png"));
+            splash = ImageIO.read(new File("res//TitleSplash.png"));
+            julian = ImageIO.read(new File("res//Processed Shots//JulianSelect.PNG"));
+            callum = ImageIO.read(new File("res//Processed Shots//CallumSelect.PNG"));
+            naufil = ImageIO.read(new File("res//Processed Shots//NaufilSelect.PNG"));
+            sun = ImageIO.read(new File("res//Arena Logos//Sun.png"));
+            moon = ImageIO.read(new File("res//Arena Logos//Moon.png"));
+            einstein = ImageIO.read(new File("res//Arena Logos//Einstein.png"));
         } catch (IOException e) {
             System.out.println("Missing Loading Screen Image: " + e);
         }
