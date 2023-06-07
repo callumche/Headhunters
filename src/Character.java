@@ -260,7 +260,7 @@ public abstract class Character {
             if (e.getKeyCode() == KeyEvent.VK_NUMPAD1 || e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
                 headbutt();
             }
-            if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
+            if (e.getKeyCode() == KeyEvent.VK_NUMPAD2 || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                 spit();
             }
         }
