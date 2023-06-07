@@ -13,7 +13,7 @@ public abstract class Character {
     protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special, spit1, spit2;
     protected BufferedImage current;
     private long markerFrame = 0;
-    protected int health = 100;
+    protected int health = 100, charType;
 
     public int getState() {
         return attackState;
