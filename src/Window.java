@@ -73,15 +73,15 @@ public class Window extends JPanel {
     public static boolean isHit(boolean caller) { //true = P1, false = P2
         if (caller) { //P1 is attacking
             if (p1.getDirection() && p2.getState() != 4) {//if P1 is facing right
-                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && position);
+                return (distance <= 250 && Math.abs(p2.y - p1.y) < 50 && position);
             } else if (p1.getState() != 4) {
-                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && !position);
+                return (distance <= 250 && Math.abs(p2.y - p1.y) < 50 && !position);
             }
         } else {
             if (p2.getDirection() && p1.getState() != 4) {//if right
-                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && !position);
+                return (distance <= 250 && Math.abs(p2.y - p1.y) < 50 && !position);
             } else if (p1.getState() != 4) {
-                return (distance <= 240 && Math.abs(p2.y - p1.y) < 50 && position);
+                return (distance <= 250 && Math.abs(p2.y - p1.y) < 50 && position);
             }
         }
         return false;
@@ -115,17 +115,20 @@ public class Window extends JPanel {
     }
 
     public void collide() {
-        if (distance < 220) {
-            double nextDist = Math.max(p1.xv, p2.xv) - Math.min(p1.xv, p2.xv) / 2;
-            if (position) {
-                p1.x -= 25 + nextDist;
-                p2.x += 25 - nextDist;
-            } else {
-                p1.x += 25 - nextDist;
-                p2.x -= 25 + nextDist;
-            }
-            if (p1.getDirection()) {
-            }
+        double distance = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+
+        if (distance < 200) {
+            double overlap = 200 - distance;
+            double dx = p2.x - p1.x;
+            double dy = p2.y - p1.y;
+            double angle = Math.atan2(dy, dx);
+            double shiftX = overlap * Math.cos(angle);
+            double shiftY = overlap * Math.sin(angle);
+
+            p1.x -= shiftX / 2;
+            p1.y -= shiftY / 2;
+            p2.x += shiftX / 2;
+            p2.y += shiftY / 2;
         }
     }
 
