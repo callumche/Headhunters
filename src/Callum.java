@@ -9,6 +9,7 @@ public class Callum extends Character{
 
     public Callum (boolean p) {
         super(p);
+        charType = 1;
     }
 
     public void paint(Graphics2D g2d){

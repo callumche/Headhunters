@@ -8,6 +8,7 @@ public class Naufil extends Character {
 
     public Naufil (boolean p) {
         super(p);
+        charType = 2;
     }
 
     public void paint(Graphics2D g2d){

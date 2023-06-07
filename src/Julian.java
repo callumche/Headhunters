@@ -9,6 +9,7 @@ public class Julian extends Character{
 
     public Julian (boolean p) {
         super(p);
+        charType = 0;
     }
 
     public void paint(Graphics2D g2d){
