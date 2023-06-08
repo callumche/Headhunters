@@ -38,7 +38,7 @@ public class HealthBar {
                 g2d.setColor(Color.GREEN);
                 g2d.fillRect(1100, 11, health * 8, 38);
                 g2d.setColor(Color.RED);
-                g2d.fillRect(health * 8 + 1100, 11, 800 + health * 8, 38);
+                g2d.fillRect(health * 8 + 1100, 11, 800 - health * 8, 38);
             }
         }
 
