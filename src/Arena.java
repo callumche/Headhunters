@@ -40,7 +40,7 @@ public class Arena {
 
         arena = Window.getArenaSelect();
         if (arena == 0) {
-            g2d.setColor(Color.cyan);
+            g2d.setColor(new Color(135, 206, 235));
             g2d.fillRect(0,0,Window.resX,Window.resY);
             g2d.setColor(Color.yellow);
             g2d.fillOval(100, 200, 300, 300);
