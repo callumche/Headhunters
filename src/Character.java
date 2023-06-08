@@ -7,7 +7,7 @@ public abstract class Character {
     public int x = 480, y = 300;
     public double xv = 0, yv = 0, xa = 0, ya = 0; //fuck you, im making this public (i don't want a trillion getters/setters) - FIX LATER?
     protected int speedCap = 20, jumpCount = 0;
-    protected boolean lookingDirection = true, hurtDirection = true; //false = left, true = right
+    protected boolean lookingDirection = true, altDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
     protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = headbutt, 4 = hurt, 5 = special
     protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special1, special2, spit1, spit2;
@@ -214,9 +214,9 @@ public abstract class Character {
             attackState = 4;
             markerFrame = Window.getTick();
             changeImage("hurt");
-            hurtDirection = lookingDirection;
+            altDirection = lookingDirection;
         }
-        lookingDirection = hurtDirection;
+        lookingDirection = altDirection;
         if (Window.getTick() - markerFrame >= 20) {
             attackState = 0;
             changeImage("neutral");

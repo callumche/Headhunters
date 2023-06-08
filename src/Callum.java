@@ -17,8 +17,11 @@ public class Callum extends Character{
         if (attackState == 0) {
             attackState = 5;
             markerFrame = Window.getTick();
+            altDirection = lookingDirection;
             changeImage("special1");
         }
+
+        lookingDirection = altDirection;
 
         if (Window.getTick() - markerFrame >= 60) {
             changeImage("special2");
@@ -54,11 +57,28 @@ public class Callum extends Character{
         }
 
         if (firingLaser) {
+            if (Math.random() <= 0.5) {
+                x += 5 * Math.random();
+                y += 5 * Math.random();
+            } else {
+                x -= 5 * Math.random();
+                y -= 5 * Math.random();
+            }
             g2d.setColor(new Color (84, 0, 255));
             if (lookingDirection) {
                 g2d.fillRect(x + 190, y + 75, 1920, 50);
+                g2d.setColor(Color.WHITE);
+                if (Window.getTick() % 16 <= 8) {
+                    for (int i = x; i <= 1920; i += 50){
+                        g2d.fillRect(i, y + 90, 50, 20);
+                    }
+                } else {
+                    for (int i = x + 25; i <= 1920; i += 50){
+                        g2d.fillRect(i, y + 85, 50, 30);
+                    }
+                }
             } else {
-                g2d.fillRect(x + 10, y + 75, -1920, 50);
+                g2d.fillRect(x - 1910, y + 75, 1920, 50);
             }
 
         }
