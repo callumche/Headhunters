@@ -208,16 +208,19 @@ public class Window extends JPanel {
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+//        double longest = 0;
         while(true){
             Thread.sleep(16);
             //roughly 60FPS
             //Thread.sleep(60); //debug
-            long startTime = System.nanoTime();
+//            long startTime = System.nanoTime();
             globalTick++;
             frame.repaint();
-            long endTime = System.nanoTime();
-            System.out.println((endTime - startTime) / 1000000.0);
+//            long endTime = System.nanoTime();
+//            if ((endTime - startTime) / 1000000.0 > longest) {
+//                longest = ((endTime - startTime) / 1000000.0);
+//            }
+//            System.out.println(longest);
         }
     }
 }
