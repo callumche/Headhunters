@@ -10,9 +10,9 @@ public abstract class Character {
     protected boolean lookingDirection = true, hurtDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
     protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = headbutt, 4 = hurt, 5 = special
-    protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special, spit1, spit2;
+    protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special1, special2, spit1, spit2;
     protected BufferedImage current;
-    private long markerFrame = 0;
+    protected long markerFrame = 0;
     protected int health = 100, charType;
 
     public int getState() {
@@ -64,6 +64,9 @@ public abstract class Character {
         if (attackState == 4) {
             hurt();
         }
+        if (attackState == 5) {
+            special();
+        }
         if (jumpCount != 0 && attackState == 0) {
             changeImage("jump");
         } else if (attackState == 0) {
@@ -97,11 +100,21 @@ public abstract class Character {
             case "spit2":
                 current = spit2;
                 break;
+            case "special1":
+                current = special1;
+                break;
+            case "special2":
+                current = special2;
+                break;
             default:
                 current = null;
                 System.out.println("Image change failed, defaulting to neutral for P" + playerNo);
                 break;
         }
+    }
+
+    public void special(){
+
     }
 
     public void headbutt(){
@@ -241,6 +254,9 @@ public abstract class Character {
             if (e.getKeyCode() == KeyEvent.VK_N) {
                 spit();
             }
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                special();
+            }
         } else if (attackState != 4) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT){
                 left = true;
@@ -262,6 +278,9 @@ public abstract class Character {
             }
             if (e.getKeyCode() == KeyEvent.VK_NUMPAD2 || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                 spit();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                special();
             }
         }
 

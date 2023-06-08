@@ -21,7 +21,8 @@ public class Julian extends Character{
                 bite2 = ImageIO.read(new File("res//Sprites//JulianBite2.PNG"));
                 headbutt = ImageIO.read(new File("res//Sprites//JulianHeadbutt.PNG"));
                 hurt = ImageIO.read(new File("res//Sprites//JulianHurt.PNG"));
-                special = ImageIO.read(new File("res//Sprites//JulianSpecial.PNG"));
+                special1 = ImageIO.read(new File("res//Sprites//JulianSpecial1.PNG"));
+                special2 = ImageIO.read(new File("res//Sprites//JulianSpecial2.PNG"));
                 spit1 = ImageIO.read(new File("res//Sprites//JulianSpit1.PNG"));
                 spit2 = ImageIO.read(new File("res//Sprites//JulianSpit2.PNG"));
             } catch (IOException e) {

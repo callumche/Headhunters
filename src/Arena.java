@@ -8,9 +8,10 @@ import java.nio.Buffer;
 public class Arena {
 
     private int arena;
-    private boolean isInitialized = false;
+    private boolean isInitialized = false, countdown = true;
     private BufferedImage phys;
     private int time;
+    private int count;
 
     public Arena(){
     }
@@ -20,8 +21,12 @@ public class Arena {
     }
 
     public void paint(Graphics2D g2d){
-        if (!isInitialized){
-            Timer timer = new Timer(0,1000);
+        if (!isInitialized) {
+            if (countdown) {
+                Timer counter = new Timer (0,1000);
+            } else {
+                Timer timer = new Timer(0, 1000);
+            }
             isInitialized = true;
             if (Window.getPlayerOneSelect() == 2 || Window.getPlayerTwoSelect() == 2) {
                 try {
@@ -40,7 +45,7 @@ public class Arena {
 
         arena = Window.getArenaSelect();
         if (arena == 0) {
-            g2d.setColor(Color.cyan);
+            g2d.setColor(new Color(135, 206, 235));
             g2d.fillRect(0,0,Window.resX,Window.resY);
             g2d.setColor(Color.yellow);
             g2d.fillOval(100, 200, 300, 300);
@@ -59,11 +64,22 @@ public class Arena {
         } else if (arena == 2) {
             g2d.drawImage(phys, 0, 0, null);
         }
-
-        time = 120 - Helper.checkTime(0,0);
-        g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
-        g2d.drawString(""+time,1000,30);
-
+        if (countdown){
+            count = 4 - Helper.checkTime(0,0);
+            g2d.setColor(Color.BLACK);
+            g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
+            if (count >= 1) {
+                g2d.drawString("" + count, 1000, 200);
+            } else if (count==0){
+                g2d.drawString("GO",1000,200);
+            } else {
+                countdown = false;
+            }
+        } else {
+            time = 125 - Helper.checkTime(0, 0);
+            g2d.setColor(Color.BLACK);
+            g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
+            g2d.drawString("" + time, 1000, 30);
+        }
     }
 }

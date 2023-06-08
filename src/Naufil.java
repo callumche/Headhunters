@@ -20,7 +20,8 @@ public class Naufil extends Character {
                 bite2 = ImageIO.read(new File("res//Sprites//NaufilBite2.PNG"));
                 headbutt = ImageIO.read(new File("res//Sprites//NaufilHeadbutt.PNG"));
                 hurt = ImageIO.read(new File("res//Sprites//NaufilHurt.PNG"));
-                special = ImageIO.read(new File("res//Sprites//NaufilSpecial.PNG"));
+                special1 = ImageIO.read(new File("res//Sprites//NaufilSpecial1.PNG"));
+                special2 = ImageIO.read(new File("res//Sprites//NaufilSpecial2.PNG"));
                 spit1 = ImageIO.read(new File("res//Sprites//NaufilSpit1.PNG"));
                 spit2 = ImageIO.read(new File("res//Sprites//NaufilSpit2.PNG"));
             } catch (IOException e) {
