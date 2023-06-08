@@ -11,13 +11,11 @@ public class Window extends JPanel {
     Arena arena = new Arena();
     public static final int resX = 1920, resY = 1080;
     private static long globalTick = 0;
-    private static boolean isStarting = true;
+    private static boolean isStarting = true, finished = false, p1Winner = true, position = true; //true = P2 to right of P1, false = P2 to left
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
     static Character p1, p2;
     static HealthBar hb1 , hb2;
     private static double playerDistance;
-    private static boolean position = true; //true = P2 to right of P1, false = P2 to left
-    private static boolean finished = false, p1Winner = true;
     public static ArrayList<Spit> spits = new ArrayList<Spit>();
 
     public Window(){
@@ -50,7 +48,7 @@ public class Window extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         if (isStarting) {
             startMenu.paint(g2d);
-        } else if (!finished){
+        } else if (!finished) {
             playerDistance = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
             position = p2.x > p1.x;
             arena.paint(g2d);
@@ -60,7 +58,7 @@ public class Window extends JPanel {
             hb2.paint(g2d);
             collide();
             if (!spits.isEmpty()) {
-                for (int i = 0; i < spits.size(); i++){
+                for (int i = 0; i < spits.size(); i++) {
                     spits.get(i).paint(g2d);
                     if (isProjectileHit(spits.get(i))) {
                         if (spits.get(i).getOwner()) {
@@ -80,22 +78,18 @@ public class Window extends JPanel {
                         break;
                     }
                 }
-
-
             }
-
         } else {
             winS.paint(g2d);
         }
     }
-
-    public double getDistance() {
-        return playerDistance;
+    public static void restart(){
+        isStarting = true;
+        finished = false;
+        p1Winner = true;
+        position = true;
+        globalTick = 0;
     }
-    public boolean getPosition() {
-        return position;
-    }
-
     public boolean isProjectileHit(Spit i) {
         if (i.getOwner()) { //P1
             int xDist = Math.abs(p2.x + 100 - (i.x + 25));
@@ -172,7 +166,6 @@ public class Window extends JPanel {
             p2.xv *= 0.75;
         }
     }
-
     public static boolean getWinner(){return p1Winner;}
     public static void setWinner(Boolean bool){p1Winner = bool;}
     public static void setFinished(){ finished = true;}
@@ -208,19 +201,10 @@ public class Window extends JPanel {
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        double longest = 0;
-        while(true){
+        while (true) {
             Thread.sleep(16);
-            //roughly 60FPS
-            //Thread.sleep(60); //debug
-//            long startTime = System.nanoTime();
             globalTick++;
             frame.repaint();
-//            long endTime = System.nanoTime();
-//            if ((endTime - startTime) / 1000000.0 > longest) {
-//                longest = ((endTime - startTime) / 1000000.0);
-//            }
-//            System.out.println(longest);
         }
     }
 }
