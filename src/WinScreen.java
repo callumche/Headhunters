@@ -12,7 +12,7 @@ public class WinScreen {
     private Font f = null;
     public WinScreen(){}
 
-    private BufferedImage winnner() { //Work in Progress
+    private BufferedImage winner() { //Work in Progress
 
         p1Winner = Window.getWinner();
 
@@ -22,8 +22,7 @@ public class WinScreen {
 
                 case 0: //If Julian is player1 and wins
                     try {
-                        System.out.println("Julian Win!");
-                        winner = ImageIO.read(new File("res//Sprites//JulianWin.PNG"));
+                        winner = ImageIO.read(new File("res//Processed Shots//JulianWin.PNG"));
 
                     } catch (IOException e) {
 
@@ -35,8 +34,7 @@ public class WinScreen {
                 case 1: //If Callum is player1 and wins
                     try {
 
-                        System.out.println("Callum Win!");
-                        winner = ImageIO.read(new File("res\\Sprites\\CallumWin.PNG"));
+                        winner = ImageIO.read(new File("res\\Processed Shots\\CallumWin.PNG"));
 
                     } catch (IOException e) {
 
@@ -48,8 +46,52 @@ public class WinScreen {
                 case 2: //If Naufil is player1 and wins
                     try {
 
-                        System.out.println("Naufil Win!");
-                        winner = ImageIO.read(new File("res\\Sprites\\NaufilWin.PNG"));
+                        winner = ImageIO.read(new File("res\\Processed Shots\\NaufilWin.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                default: //Error
+                    System.out.println("Winner is not recorded");
+
+
+            }
+
+        } else {
+
+            switch (Window.p2.charType) {
+
+                case 0: //If Julian is player2 and wins
+                    try {
+                        winner = ImageIO.read(new File("res//Processed Shots//JulianWin.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                case 1: //If Callum is player2 and wins
+                    try {
+
+                        winner = ImageIO.read(new File("res\\Processed Shots\\CallumWin.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                case 2: //If Naufil is player2 and wins
+                    try {
+
+                        winner = ImageIO.read(new File("res\\Processed Shots\\NaufilWin.PNG"));
 
                     } catch (IOException e) {
 
@@ -69,19 +111,137 @@ public class WinScreen {
         return winner;
 
     }
-    public void paint(Graphics2D g2d){
+
+    private BufferedImage loser() {
+
         p1Winner = Window.getWinner();
-        f = new Font("Comic Sans MS", Font.BOLD, 72);
-        g2d.setFont(f);
-        if (p1Winner){
-            g2d.setColor(Color.red);
-            g2d.drawString("Player 1 Wins!",700,200);
+
+        if (!p1Winner) {
+
+            switch (Window.p1.charType) {
+
+                case 0: //If Julian is player1 and loses
+                    try {
+
+                        loser = ImageIO.read(new File("res//Processed Shots//JulianLose.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                case 1: //If Callum is player1 and loses
+                    try {
+
+                        loser = ImageIO.read(new File("res\\Processed Shots\\CallumLose.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                case 2: //If Naufil is player1 and loses
+                    try {
+
+                        winner = ImageIO.read(new File("res\\Processed Shots\\NaufilLose.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                default: //Error
+                    System.out.println("Loser is not recorded");
+
+
+            }
+
         } else {
-            g2d.setColor(Color.blue);
-            g2d.drawString("Player 2 Wins!",700,200);
+
+            switch (Window.p2.charType) {
+
+                case 0: //If Julian is player2 and loses
+                    try {
+                        loser = ImageIO.read(new File("res//Processed Shots//JulianLose.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                case 1: //If Callum is player2 and loses
+                    try {
+
+                        loser = ImageIO.read(new File("res\\Processed Shots\\CallumLose.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                case 2: //If Naufil is player2 and loses
+                    try {
+
+                        loser = ImageIO.read(new File("res\\Processed Shots\\NaufilLose.PNG"));
+
+                    } catch (IOException e) {
+
+                        System.out.println("Invalid Image");
+
+                    }
+                    break;
+
+                default: //Error
+                    System.out.println("Loser is not recorded");
+
+
+            }
+
         }
 
-        g2d.drawImage(winner, 300, 500, 500, 500, null);
+        return loser;
+
+    }
+
+    public void paint(Graphics2D g2d){
+
+        p1Winner = Window.getWinner();
+
+        f = new Font("Comic Sans MS", Font.BOLD, 72);
+        g2d.setFont(f);
+
+        if (p1Winner){
+
+            g2d.setColor(new Color(139, 0, 0));
+            g2d.fillRect(0, 0, 1920, 1080);
+
+            g2d.setColor(Color.red);
+            g2d.drawString("Player 1 Wins!",700,200);
+
+
+        } else {
+
+            g2d.setColor(new Color(0, 0, 54));
+            g2d.fillRect(0, 0, 1920, 1080);
+
+            g2d.setColor(Color.blue);
+            g2d.drawString("Player 2 Wins!",700,200);
+
+
+        }
+
+        g2d.drawImage(winner(), 100, 300, 700, 700, null);
+        g2d.drawImage(loser(), 1000, 400, 500, 500, null);
 
     }
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Window extends JPanel {
     SelectScreen startMenu = new SelectScreen();
-    WinScreen winS = new WinScreen();
     Arena arena = new Arena();
     public static final int resX = 1920, resY = 1080;
     private static long globalTick = 0;
@@ -19,6 +18,8 @@ public class Window extends JPanel {
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
     private static boolean finished = false, p1Winner = true;
     public static ArrayList<Spit> spits = new ArrayList<Spit>();
+
+    WinScreen winS = new WinScreen();
 
     public Window(){
         addKeyListener(new KeyListener() {
@@ -209,18 +210,10 @@ public class Window extends JPanel {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        double longest = 0;
-        while(true){
+        while(true) {
             Thread.sleep(16);
-            //roughly 60FPS
-            //Thread.sleep(60); //debug
-//            long startTime = System.nanoTime();
             globalTick++;
             frame.repaint();
-//            long endTime = System.nanoTime();
-//            if ((endTime - startTime) / 1000000.0 > longest) {
-//                longest = ((endTime - startTime) / 1000000.0);
-//            }
-//            System.out.println(longest);
         }
     }
 }
