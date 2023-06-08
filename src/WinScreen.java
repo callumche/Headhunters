@@ -23,7 +23,7 @@ public class WinScreen {
                 case 0: //If Julian is player1 and wins
                     try {
                         System.out.println("Julian Win!");
-                        winner = ImageIO.read(new File("res\\Sprites\\JulianWin.PNG"));
+                        winner = ImageIO.read(new File("res//Sprites//JulianWin.PNG"));
 
                     } catch (IOException e) {
 

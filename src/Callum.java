@@ -15,15 +15,15 @@ public class Callum extends Character{
     public void paint(Graphics2D g2d){
         if (!isInitialized) { //loads pics into memory on first frame
             try {
-                neutral = ImageIO.read(new File("res\\Sprites\\CallumNeutral.PNG"));
-                jump = ImageIO.read(new File("res\\Sprites\\CallumJump.PNG"));
-                bite1 = ImageIO.read(new File("res\\Sprites\\CallumBite1.PNG"));
-                bite2 = ImageIO.read(new File("res\\Sprites\\CallumBite2.PNG"));
-                headbutt = ImageIO.read(new File("res\\Sprites\\CallumHeadbutt.PNG"));
-                hurt = ImageIO.read(new File("res\\Sprites\\CallumHurt.PNG"));
-                special = ImageIO.read(new File("res\\Sprites\\CallumSpecial.PNG"));
-                spit1 = ImageIO.read(new File("res\\Sprites\\CallumSpit1.PNG"));
-                spit2 = ImageIO.read(new File("res\\Sprites\\CallumSpit2.PNG"));
+                neutral = ImageIO.read(new File("res//Sprites//CallumNeutral.PNG"));
+                jump = ImageIO.read(new File("res//Sprites//CallumJump.PNG"));
+                bite1 = ImageIO.read(new File("res//Sprites//CallumBite1.PNG"));
+                bite2 = ImageIO.read(new File("res//Sprites//CallumBite2.PNG"));
+                headbutt = ImageIO.read(new File("res//Sprites//CallumHeadbutt.PNG"));
+                hurt = ImageIO.read(new File("res//Sprites//CallumHurt.PNG"));
+                special = ImageIO.read(new File("res//Sprites//CallumSpecial.PNG"));
+                spit1 = ImageIO.read(new File("res//Sprites//CallumSpit1.PNG"));
+                spit2 = ImageIO.read(new File("res//Sprites//CallumSpit2.PNG"));
             } catch (IOException e) {
                 System.out.println("Missing Callum Image: " + e);
             }

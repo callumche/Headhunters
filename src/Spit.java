@@ -5,39 +5,54 @@ import java.io.File;
 import java.io.IOException;
 
 public class Spit {
-    private int x, y;
-    private double xv, yv = 0;
+    public int x, y;
+    private double xv, yv = 5;
     private boolean isInitialized = false, owner;
     private BufferedImage img;
+    private boolean direct;
+
+    public boolean getOwner() {
+        return owner;
+    }
 
     public Spit (int newX, int newY, boolean dir, boolean own) {
         x = newX;
-        y = newY;
+        y = newY + 125;
+        direct = dir;
         if (dir) {
-            xv = 35;
+            xv = 50;
+            x += 100;
         } else {
-            xv = -35;
+            xv = -50    ;
         }
         owner = own;
     }
 
     public void ballistic() {
         x += xv;
-        y += yv;
-        xv -= 0.5;
-        yv -= 0.25;
+        y -= yv;
+        if (xv > 0) {
+            xv -= 0.5;
+        } else {
+            xv += 0.5;
+        }
+        yv -= 0.5;
     }
 
     public void paint(Graphics2D g2d) {
         if (!isInitialized) {
             try {
-                img = ImageIO.read(new File("res\\Sprites\\Spit.PNG"));
+                img = ImageIO.read(new File("res//Sprites//Spit.PNG"));
             } catch (IOException e) {
                 System.out.println("Missing Spit Image: " + e);
             }
             isInitialized = true;
         }
         ballistic();
-        g2d.drawImage(img, x, y, null);
+        if (!direct) {
+            g2d.drawImage(img, x + img.getWidth(), y, -img.getWidth(), img.getHeight(), null); //mirrored, look right
+        } else {
+            g2d.drawImage(img, x, y, img.getWidth(), img.getHeight(), null);
+        }
     }
 }
