@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Spit {
     public int x, y;
-    private double xv, yv = 0;
+    private double xv, yv = 5;
     private boolean isInitialized = false, owner;
     private BufferedImage img;
     private boolean direct;
@@ -29,11 +29,13 @@ public class Spit {
     }
 
     public void ballistic() {
-        if (x > 0) {
-            x += xv;
-        }
+        x += xv;
         y -= yv;
-        xv -= 0.3;
+        if (xv > 0) {
+            xv -= 0.5;
+        } else {
+            xv += 0.5;
+        }
         yv -= 0.5;
     }
 
