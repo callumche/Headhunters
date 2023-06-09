@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Window extends JPanel {
     SelectScreen startMenu = new SelectScreen();
     Arena arena = new Arena();
-    public static final int resX = 1700, resY = 900;
+    public static final int resX = 1920, resY = 1080;
     private static long globalTick = 0;
     private static boolean isStarting = true;
     private static int playerOneSelect = 4, playerTwoSelect = 4, arenaSelect = 3;
