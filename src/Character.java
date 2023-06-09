@@ -14,13 +14,14 @@ public abstract class Character {
     protected BufferedImage current;
     protected long markerFrame = 0;
     public int health = 100, charType;
-    protected int hurtDur = 0;
+    protected int hurtDur = 0, startLen = 180;
     protected int specialCount = 0;
 
-    public void start() {
+    public void start(int len) {
         lookingDirection = playerNo;
         if (attackState != 6) {
             attackState = 6;
+            startLen = len;
             markerFrame = Window.getTick();
             if (playerNo) {
                 xv = -5;
@@ -30,7 +31,7 @@ public abstract class Character {
             changeImage("evil");
         }
 
-        if (Window.getTick() - markerFrame >= 180) {
+        if (Window.getTick() - markerFrame >= len) {
             attackState = 0;
         }
     }
@@ -96,7 +97,7 @@ public abstract class Character {
             special();
         }
         if (attackState == 6) {
-            start();
+            start(startLen);
         }
         if (jumpCount != 0 && attackState == 0) {
             changeImage("jump");
@@ -273,7 +274,7 @@ public abstract class Character {
     }
 
     public void keyPressed(KeyEvent e){
-        if (playerNo && attackState != 4) { //P1, WASD
+        if (playerNo && attackState != 4 && attackState != 6) { //P1, WASD
             if (e.getKeyCode() == KeyEvent.VK_A) {
                 left = true;
             }
@@ -298,7 +299,7 @@ public abstract class Character {
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 special();
             }
-        } else if (attackState != 4) {
+        } else if (attackState != 4 && attackState != 6){
             if (e.getKeyCode() == KeyEvent.VK_LEFT){
                 left = true;
             }

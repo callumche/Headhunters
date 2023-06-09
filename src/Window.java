@@ -20,6 +20,10 @@ public class Window extends JPanel {
     private static boolean finished = false, p1Winner;
     public static int xOffset = 0, yOffset = 0;
 
+    public static void resetTick(){
+        globalTick = 0;
+    }
+
     public static ArrayList<Spit> spits = new ArrayList<Spit>();
     public Window(){
         addKeyListener(new KeyListener() {

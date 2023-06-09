@@ -89,6 +89,7 @@ public class SelectScreen {
                 startState++;
                 pOneSelect = 0;
                 Window.init(); //Load player selections into main class
+                Window.resetTick();
             }
         }
 

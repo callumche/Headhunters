@@ -10,7 +10,7 @@ public class Arena {
     private int arena;
     private boolean isInitialized = false, countdown = true, suddenDeath = false, starting = false;
     private BufferedImage phys;
-    private int time = 10, count = 4;
+    private int time = 10, count = 3;
 
     public Arena(){
     }
@@ -29,6 +29,9 @@ public class Arena {
                 } catch (IOException e) {
                     System.out.println("Missing Arena Image: " + e);
                 }
+        }
+        if (Window.getTick() == 32) { //magic number :(
+            count = 3;
         }
         if (Window.getTick() % 60 == 0) {
 
@@ -62,8 +65,8 @@ public class Arena {
         }
         if (countdown && count <= 3){
             if (!starting) {
-                Window.p1.start();
-                Window.p2.start();
+                Window.p1.start(180);
+                Window.p2.start(180);
                 starting = true;
             }
             if (suddenDeath) {
@@ -89,6 +92,8 @@ public class Arena {
             g2d.drawString(String.valueOf(time), 925, 50);
         }
         if (time <= 0 && !suddenDeath) {
+            Window.p1.start(300);
+            Window.p2.start(300);
             suddenDeath = true;
             countdown = true;
             count = 5;
@@ -102,8 +107,6 @@ public class Arena {
             Window.p2.yv = 0;
             Window.p1.health = 1;
             Window.p2.health = 1;
-            Window.p1.start();
-            Window.p2.start();
         }
     }
 
