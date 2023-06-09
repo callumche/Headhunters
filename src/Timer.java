@@ -5,4 +5,8 @@ public class Timer {
     TimerTask task = new Helper();
 
     public Timer(int delay, int period) {timer.schedule(task, delay, period);}
+
+    public void reset(int delay, int period){
+        timer.schedule(task, delay, period);
+    }
 }

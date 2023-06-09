@@ -1,14 +1,13 @@
 import java.awt.*;
 
 public class HealthBar {
-    private int health;
+    private int health = 0;
     private boolean p1; //true is player one health bar and false if player two
     public HealthBar(Boolean b){
         p1 = b;
     }
 
     public void paint(Graphics2D g2d){
-        health = 0;
         g2d.setColor(Color.BLACK);
         if (p1){
             health = Window.p1.getHealth();
@@ -24,6 +23,8 @@ public class HealthBar {
                 g2d.fillRect(10, 11, health * 8, 38);
                 g2d.setColor(Color.RED);
                 g2d.fillRect(health * 8 + 10, 11, 800 - health * 8, 38);
+                g2d.setColor(Color.YELLOW);
+                g2d.fillRect()
             }
         } else {
             health = Window.p2.getHealth();

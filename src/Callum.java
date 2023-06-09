@@ -73,6 +73,13 @@ public class Callum extends Character{
                 } else {
                     g2d.fillRect(x + 190, y + 85, 1920, 30);
                 }
+                if (playerNo && Math.abs(Window.p2.y - (y - 50)) <= 50 && Window.p2.x > x) {
+                    Window.p2.hurt(20);
+                    Window.p2.applyDamage(1);
+                } else if (!playerNo && Math.abs(Window.p1.y - (y - 50)) <= 50 && Window.p1.x > x) {
+                    Window.p1.hurt(20);
+                    Window.p1.applyDamage(1);
+                }
             } else {
                 g2d.fillRect(x - 1910, y + 75, 1920, 50);
                 g2d.setColor(Color.WHITE);
@@ -81,8 +88,14 @@ public class Callum extends Character{
                 } else {
                     g2d.fillRect(x - 1910, y + 85, 1920, 30);
                 }
+                if (playerNo && Math.abs(Window.p2.y - (y - 50)) <= 50 && Window.p2.x < x) {
+                    Window.p2.hurt(20);
+                    Window.p2.applyDamage(1);
+                } else if (!playerNo && Math.abs(Window.p1.y - (y - 50)) <= 50 && Window.p1.x < x) {
+                    Window.p1.hurt(20);
+                    Window.p1.applyDamage(1);
+                }
             }
-
         }
         updateDirection();
         updateState();
