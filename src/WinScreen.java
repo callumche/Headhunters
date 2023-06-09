@@ -150,7 +150,7 @@ public class WinScreen {
                 case 2: //If Naufil is player1 and loses
                     try {
 
-                        winner = ImageIO.read(new File("res\\Processed Shots\\NaufilLose.PNG"));
+                        loser = ImageIO.read(new File("res\\Processed Shots\\NaufilLose.PNG"));
 
                     } catch (IOException e) {
 
@@ -165,7 +165,7 @@ public class WinScreen {
 
             }
 
-        } else {
+        } else  if (p1Winner){
 
             switch (Window.p2.charType) {
 
@@ -244,7 +244,7 @@ public class WinScreen {
             g2d.drawString("Player 2 Wins!",700,200);
 
             g2d.drawImage(winner(), 1000, 300, 700, 700, null);
-            g2d.drawImage(loser(), 100, 400, 500, 500, null);
+            g2d.drawImage(loser(), 200, 400, 500, 500, null);
 
         }
 
