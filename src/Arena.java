@@ -8,7 +8,7 @@ import java.nio.Buffer;
 public class Arena {
 
     private int arena;
-    private boolean isInitialized = false, countdown = true, suddenDeath = false;
+    private boolean isInitialized = false, countdown = true, suddenDeath = false, starting = false;
     private BufferedImage phys;
     private int time = 10, count = 4;
 
@@ -17,6 +17,8 @@ public class Arena {
 
     public void paint(Graphics2D g2d){
         if (!isInitialized) {
+            time = 10;
+            count = 4;
             isInitialized = true;
                 try {
                     if (Window.getPlayerOneSelect() == 2 || Window.getPlayerTwoSelect() == 2) {
@@ -58,7 +60,12 @@ public class Arena {
         } else if (arena == 2) {
             g2d.drawImage(phys, Window.xOffset, Window.yOffset, null);
         }
-        if (countdown && count <= 4){
+        if (countdown && count <= 3){
+            if (!starting) {
+                Window.p1.start();
+                Window.p2.start();
+                starting = true;
+            }
             if (suddenDeath) {
                 g2d.setColor(Color.RED);
             } else {
@@ -89,8 +96,14 @@ public class Arena {
             Window.p1.y = 300;
             Window.p2.x = 1240;
             Window.p2.y = 300;
+            Window.p1.xv = 0;
+            Window.p2.xv = 0;
+            Window.p1.yv = 0;
+            Window.p2.yv = 0;
             Window.p1.health = 1;
             Window.p2.health = 1;
+            Window.p1.start();
+            Window.p2.start();
         }
     }
 

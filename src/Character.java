@@ -17,6 +17,24 @@ public abstract class Character {
     protected int hurtDur = 0;
     protected int specialCount = 0;
 
+    public void start() {
+        lookingDirection = playerNo;
+        if (attackState != 6) {
+            attackState = 6;
+            markerFrame = Window.getTick();
+            if (playerNo) {
+                xv = -5;
+            } else {
+                xv = 5;
+            }
+            changeImage("evil");
+        }
+
+        if (Window.getTick() - markerFrame >= 180) {
+            attackState = 0;
+        }
+    }
+
     public void increaseSpecial(int amount) {
         if (specialCount + amount >= 100) {
             specialCount = 100;
@@ -77,6 +95,9 @@ public abstract class Character {
         if (attackState == 5) {
             special();
         }
+        if (attackState == 6) {
+            start();
+        }
         if (jumpCount != 0 && attackState == 0) {
             changeImage("jump");
         } else if (attackState == 0) {
@@ -118,8 +139,9 @@ public abstract class Character {
                 break;
             case "evil":
                 current = evil;
+                break;
             default:
-                current = null;
+                current = neutral;
                 System.out.println("Image change failed, defaulting to neutral for P" + playerNo);
                 break;
         }
