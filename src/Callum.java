@@ -69,16 +69,18 @@ public class Callum extends Character{
                 g2d.fillRect(x + 190, y + 75, 1920, 50);
                 g2d.setColor(Color.WHITE);
                 if (Window.getTick() % 16 <= 8) {
-                    for (int i = x; i <= 1920; i += 50){
-                        g2d.fillRect(i, y + 90, 50, 20);
-                    }
+                    g2d.fillRect(x + 190, y + 95, 1920, 10);
                 } else {
-                    for (int i = x + 25; i <= 1920; i += 50){
-                        g2d.fillRect(i, y + 85, 50, 30);
-                    }
+                    g2d.fillRect(x + 190, y + 85, 1920, 30);
                 }
             } else {
                 g2d.fillRect(x - 1910, y + 75, 1920, 50);
+                g2d.setColor(Color.WHITE);
+                if (Window.getTick() % 16 <= 8) {
+                    g2d.fillRect(x - 1910, y + 95, 1920, 10);
+                } else {
+                    g2d.fillRect(x - 1910, y + 85, 1920, 30);
+                }
             }
 
         }

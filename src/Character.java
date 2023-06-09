@@ -14,6 +14,7 @@ public abstract class Character {
     protected BufferedImage current;
     protected long markerFrame = 0;
     protected int health = 100, charType;
+    protected int hurtDur = 0;
 
     public int getState() {
         return attackState;
@@ -62,7 +63,7 @@ public abstract class Character {
             headbutt();
         }
         if (attackState == 4) {
-            hurt();
+            hurt(hurtDur);
         }
         if (attackState == 5) {
             special();
@@ -134,7 +135,7 @@ public abstract class Character {
                         Window.p2.yv = 5;
                     }
                     Window.p2.applyDamage(5); //damage
-                    Window.p2.hurt();
+                    Window.p2.hurt(10);
                 }
             } else {
                 if (Window.isHit(playerNo)) {
@@ -146,11 +147,11 @@ public abstract class Character {
                         Window.p1.yv = 5;
                     }
                     Window.p1.applyDamage(5); //damage
-                    Window.p1.hurt();
+                    Window.p1.hurt(10);
                 }
             }
         }
-        if (Window.getTick() - markerFrame >= 15) {
+        if (Window.getTick() - markerFrame >= 25) {
             attackState = 0;
         }
     }
@@ -188,7 +189,7 @@ public abstract class Character {
                             Window.p2.yv = 10;
                         }
                     Window.p2.applyDamage(20); //damage
-                    Window.p2.hurt();
+                    Window.p2.hurt(40);
                 }
             } else {
                 if (Window.isHit(playerNo)) {
@@ -200,7 +201,7 @@ public abstract class Character {
                         Window.p1.yv = 10;
                     }
                     Window.p1.applyDamage(20); //damage
-                    Window.p1.hurt();
+                    Window.p1.hurt(40);
                 }
             }
         }
@@ -209,7 +210,8 @@ public abstract class Character {
         }
     }
 
-    public void hurt() {
+    public void hurt(int duration) {
+        hurtDur = duration;
         if (attackState != 4) {
             attackState = 4;
             markerFrame = Window.getTick();
@@ -217,7 +219,7 @@ public abstract class Character {
             altDirection = lookingDirection;
         }
         lookingDirection = altDirection;
-        if (Window.getTick() - markerFrame >= 20) {
+        if (Window.getTick() - markerFrame >= hurtDur) {
             attackState = 0;
             changeImage("neutral");
         }

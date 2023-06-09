@@ -64,11 +64,11 @@ public class Window extends JPanel {
                 for (int i = 0; i < spits.size(); i++){
                     spits.get(i).paint(g2d);
                     if (isProjectileHit(spits.get(i))) {
-                        if (spits.get(i).getOwner()) {
-                            p2.hurt();
+                        if (spits.get(i).getOwner() && p2.getState() != 4) {
+                            p2.hurt(10);
                             p2.applyDamage(5);
-                        } else {
-                            p1.hurt();
+                        } else if (!spits.get(i).getOwner() && p1.getState() != 4) {
+                            p1.hurt(10);
                             p1.applyDamage(5);
                         }
                         spits.remove(i);
