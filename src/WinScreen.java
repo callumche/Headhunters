@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class WinScreen {
-    private boolean p1Winner = false;
+    private boolean p1Winner = Window.getWinner();
     private BufferedImage winner;
     private BufferedImage loser;
 
@@ -19,9 +19,7 @@ public class WinScreen {
             System.out.println("k");
         }
     }
-    private BufferedImage winner() { //Work in Progress
-
-        p1Winner = Window.getWinner();
+    private BufferedImage winner() {
 
         if (p1Winner) {
 
@@ -120,8 +118,6 @@ public class WinScreen {
     }
 
     private BufferedImage loser() {
-
-        p1Winner = Window.getWinner();
 
         if (!p1Winner) {
 
@@ -235,6 +231,9 @@ public class WinScreen {
             g2d.setColor(Color.red);
             g2d.drawString("Player 1 Wins!",700,200);
 
+            g2d.drawImage(winner(), 100, 300, 700, 700, null);
+            g2d.drawImage(loser(), 1000, 400, 500, 500, null);
+
 
         } else {
 
@@ -244,11 +243,10 @@ public class WinScreen {
             g2d.setColor(Color.blue);
             g2d.drawString("Player 2 Wins!",700,200);
 
+            g2d.drawImage(winner(), 1000, 300, 700, 700, null);
+            g2d.drawImage(loser(), 100, 400, 500, 500, null);
 
         }
-
-        g2d.drawImage(winner(), 100, 300, 700, 700, null);
-        g2d.drawImage(loser(), 1000, 400, 500, 500, null);
 
     }
 }
