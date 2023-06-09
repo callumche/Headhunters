@@ -173,4 +173,14 @@ public class SelectScreen {
         }
     }
 
+    public void setStart(){
+        startState = 0;
+        pOneSelect = 0;
+        pTwoSelect = 2;
+        arenaSelectNum = 0;
+        oneDone = false;
+        twoDone = false;
+        arenaSelected = false;
+    }
+
 }

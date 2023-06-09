@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,12 @@ public class WinScreen {
     private Font f = null;
     public WinScreen(){}
 
+    public static void keyPressed(KeyEvent e){
+        if (e.getKeyCode() == KeyEvent.VK_SPACE){
+            Window.restart();
+            System.out.println("k");
+        }
+    }
     private BufferedImage winner() { //Work in Progress
 
         p1Winner = Window.getWinner();

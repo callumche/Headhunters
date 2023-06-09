@@ -6,8 +6,9 @@ import java.util.ArrayList;
 
 
 public class Window extends JPanel {
-    SelectScreen startMenu = new SelectScreen();
+    static SelectScreen startMenu = new SelectScreen();
     Arena arena = new Arena();
+    WinScreen winS = new WinScreen();
     public static final int resX = 1920, resY = 1080;
     private static long globalTick = 0;
     private static boolean isStarting = true;
@@ -18,9 +19,6 @@ public class Window extends JPanel {
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
     private static boolean finished = false, p1Winner = true;
     public static ArrayList<Spit> spits = new ArrayList<Spit>();
-
-    WinScreen winS = new WinScreen();
-
     public Window(){
         addKeyListener(new KeyListener() {
             @Override
@@ -39,6 +37,9 @@ public class Window extends JPanel {
                 if (!isStarting) {
                     p1.keyPressed(e);
                     p2.keyPressed(e);
+                }
+                if (finished) {
+                    winS.keyPressed(e);
                 }
             }
         });
@@ -90,13 +91,29 @@ public class Window extends JPanel {
         }
     }
 
-    public double getDistance() {
-        return playerDistance;
+    public static void restart(){
+        /*
+        isStarting = true;
+        finished = false;
+        p1Winner = true;
+        position = true;
+        globalTick = 0;
+         */
+        globalTick = 0;
+        isStarting = true;
+        playerOneSelect = 4;
+        playerTwoSelect = 4;
+        arenaSelect = 3;
+        Character p1 = null;
+        Character p2 = null;
+        HealthBar hb1 = null;
+        HealthBar hb2 = null;
+        position = true; //true = P2 to right of P1, false = P2 to left
+        finished = false;
+        p1Winner = true;
+        ArrayList<Spit> spits = new ArrayList<Spit>();
+        startMenu.setStart();
     }
-    public boolean getPosition() {
-        return position;
-    }
-
     public boolean isProjectileHit(Spit i) {
         if (i.getOwner()) { //P1
             int xDist = Math.abs(p2.x + 100 - (i.x + 25));
