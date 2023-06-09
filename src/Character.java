@@ -17,6 +17,14 @@ public abstract class Character {
     protected int hurtDur = 0;
     protected int specialCount = 0;
 
+    public void increaseSpecial(int amount) {
+        if (specialCount + amount >= 100) {
+            specialCount = 100;
+        } else {
+            specialCount += amount;
+        }
+    }
+
     public int getState() {
         return attackState;
     }
@@ -136,7 +144,7 @@ public abstract class Character {
                     }
                     Window.p2.applyDamage(5); //damage
                     Window.p2.hurt(10);
-                    specialCount += 10;
+                    increaseSpecial(10);
                 }
             } else {
                 if (Window.isHit(playerNo)) {
@@ -149,7 +157,7 @@ public abstract class Character {
                     }
                     Window.p1.applyDamage(5); //damage
                     Window.p1.hurt(10);
-                    specialCount += 10;
+                    increaseSpecial(10);
                 }
             }
         }
@@ -192,7 +200,7 @@ public abstract class Character {
                         }
                     Window.p2.applyDamage(20); //damage
                     Window.p2.hurt(40);
-                    specialCount += 40;
+                    increaseSpecial(40);
                 }
             } else {
                 if (Window.isHit(playerNo)) {
@@ -205,7 +213,7 @@ public abstract class Character {
                     }
                     Window.p1.applyDamage(20); //damage
                     Window.p1.hurt(40);
-                    specialCount += 40;
+                    increaseSpecial(40);
                 }
             }
         }
