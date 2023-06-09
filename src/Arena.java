@@ -10,22 +10,18 @@ public class Arena {
     private int arena;
     private boolean isInitialized = false, countdown = true;
     private BufferedImage phys;
-    private int time;
-    private int count;
-
+    private int time, count, four= 4, hunTwentyFive = 125;
     public Arena(){
-    }
-
-    public int getTime() {
-        return time;
     }
 
     public void paint(Graphics2D g2d){
         if (!isInitialized) {
+            Timer counter = null;
+            Timer timer = null;
             if (countdown) {
-                Timer counter = new Timer (0,1000);
+                counter = new Timer (0,1000);
             } else {
-                Timer timer = new Timer(0, 1000);
+                timer = new Timer(0, 1000);
             }
             isInitialized = true;
             if (Window.getPlayerOneSelect() == 2 || Window.getPlayerTwoSelect() == 2) {
@@ -65,7 +61,7 @@ public class Arena {
             g2d.drawImage(phys, 0, 0, null);
         }
         if (countdown){
-            count = 4 - Helper.checkTime(0,0);
+            count = four - Helper.checkTime(0,0);
             g2d.setColor(Color.yellow);
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
             if (count >= 1) {
@@ -76,10 +72,14 @@ public class Arena {
                 countdown = false;
             }
         } else {
-            time = 125 - Helper.checkTime(0, 0);
+            time = hunTwentyFive - Helper.checkTime(0, 0);
             g2d.setColor(Color.yellow);
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
             g2d.drawString("" + time, 925, 50);
         }
+    }
+    public void reset(){
+        four = 4;
+        hunTwentyFive = 125;
     }
 }
