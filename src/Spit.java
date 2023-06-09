@@ -50,9 +50,9 @@ public class Spit {
         }
         ballistic();
         if (!direct) {
-            g2d.drawImage(img, x + img.getWidth(), y, -img.getWidth(), img.getHeight(), null); //mirrored, look right
+            g2d.drawImage(img, x + img.getWidth() + Window.xOffset, y + Window.yOffset, -img.getWidth(), img.getHeight(), null); //mirrored, look right
         } else {
-            g2d.drawImage(img, x, y, img.getWidth(), img.getHeight(), null);
+            g2d.drawImage(img, x + Window.xOffset, y + Window.yOffset, img.getWidth(), img.getHeight(), null);
         }
     }
 }

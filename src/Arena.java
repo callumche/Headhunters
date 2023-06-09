@@ -8,78 +8,90 @@ import java.nio.Buffer;
 public class Arena {
 
     private int arena;
-    private boolean isInitialized = false, countdown = true;
+    private boolean isInitialized = false, countdown = true, suddenDeath = false;
     private BufferedImage phys;
-    private int time, count, four= 4, hunTwentyFive = 125;
+    private int time = 10, count = 4;
+
     public Arena(){
     }
 
     public void paint(Graphics2D g2d){
         if (!isInitialized) {
-            Timer counter = null;
-            Timer timer = null;
-            if (countdown) {
-                counter = new Timer (0,1000);
-            } else {
-                timer = new Timer(0, 1000);
-            }
             isInitialized = true;
-            if (Window.getPlayerOneSelect() == 2 || Window.getPlayerTwoSelect() == 2) {
                 try {
-                    phys = ImageIO.read(new File("res//PhysicsNaufilDead.PNG"));
+                    if (Window.getPlayerOneSelect() == 2 || Window.getPlayerTwoSelect() == 2) {
+                        phys = ImageIO.read(new File("res//PhysicsNaufilDead.PNG"));
+                    } else {
+                        phys = ImageIO.read(new File("res//PhysicsNaufilAlive.PNG"));
+                    }
                 } catch (IOException e) {
                     System.out.println("Missing Arena Image: " + e);
                 }
-            } else {
-                try {
-                    phys = ImageIO.read(new File("res//PhysicsNaufilAlive.PNG"));
-                } catch (IOException e) {
-                    System.out.println("Missing Arena Image: " + e);
-                }
-            }
         }
+        if (Window.getTick() % 60 == 0) {
 
+            if (countdown) {
+                count -= 1;
+            } else {
+                time -= 1;
+            }
+
+        }
         arena = Window.getArenaSelect();
         if (arena == 0) {
             g2d.setColor(new Color(28, 167, 231));
             g2d.fillRect(0,0,Window.resX,Window.resY);
             g2d.setColor(Color.yellow);
-            g2d.fillOval(100, 200, 300, 300);
+            g2d.fillOval(Window.xOffset + 100, Window.yOffset + 200, 300, 300);
             g2d.setColor(Color.green);
             for (int i = 0; i <= Window.resX; i += 15) {
-                g2d.fillRect(i, 950, 5, 150);
+                g2d.fillRect(Window.xOffset + i, Window.yOffset + 950, 5, 150);
             }
         } else if (arena == 1) {
             g2d.setColor(Color.darkGray);
             g2d.fillRect(0,0,Window.resX,Window.resY);
             g2d.setColor(Color.white);
-            g2d.fillOval(100, 200, 300, 300);
-            g2d.fillOval(1800, 100, 10, 10);
-            g2d.fillOval(1650, 150, 10, 10);
-            g2d.fillOval(1200, 75, 5, 5);
+            g2d.fillOval(Window.xOffset + 100, Window.yOffset + 200, 300, 300);
+            g2d.fillOval(Window.xOffset + 1800, Window.yOffset + 100, 10, 10);
+            g2d.fillOval(Window.xOffset + 1650, Window.yOffset + 150, 10, 10);
+            g2d.fillOval(Window.xOffset + 1200, Window.yOffset + 75, 5, 5);
         } else if (arena == 2) {
-            g2d.drawImage(phys, 0, 0, null);
+            g2d.drawImage(phys, Window.xOffset, Window.yOffset, null);
         }
-        if (countdown){
-            count = four - Helper.checkTime(0,0);
-            g2d.setColor(Color.yellow);
+        if (countdown && count <= 4){
+            if (suddenDeath) {
+                g2d.setColor(Color.RED);
+            } else {
+                g2d.setColor(Color.yellow);
+            }
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
             if (count >= 1) {
-                g2d.drawString("" + count, 925, 200);
+                g2d.drawString(String.valueOf(count), 925, 200);
             } else if (count==0){
                 g2d.drawString("GO",925,200);
             } else {
                 countdown = false;
             }
+        } else if (suddenDeath) {
+            g2d.setColor(Color.RED);
+            g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+            g2d.drawString("SUDDEN DEATH", 725, 100);
         } else {
-            time = hunTwentyFive - Helper.checkTime(0, 0);
             g2d.setColor(Color.yellow);
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-            g2d.drawString("" + time, 925, 50);
+            g2d.drawString(String.valueOf(time), 925, 50);
+        }
+        if (time <= 0 && !suddenDeath) {
+            suddenDeath = true;
+            countdown = true;
+            count = 5;
+            Window.p1.x = 480;
+            Window.p1.y = 300;
+            Window.p2.x = 1240;
+            Window.p2.y = 300;
+            Window.p1.health = 1;
+            Window.p2.health = 1;
         }
     }
-    public void reset(){
-        four = 4;
-        hunTwentyFive = 125;
-    }
+
 }

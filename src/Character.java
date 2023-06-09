@@ -9,11 +9,11 @@ public abstract class Character {
     protected int speedCap = 20, jumpCount = 0;
     protected boolean lookingDirection = true, altDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
-    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = headbutt, 4 = hurt, 5 = special
-    protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special1, special2, spit1, spit2;
+    protected int attackState = 0; //0 = not attacking, 1 = biting, 2 = spitting, 3 = headbutt, 4 = hurt, 5 = special, 6 = starting/dark
+    protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special1, special2, spit1, spit2, evil;
     protected BufferedImage current;
     protected long markerFrame = 0;
-    protected int health = 100, charType;
+    public int health = 100, charType;
     protected int hurtDur = 0;
     protected int specialCount = 0;
 
@@ -116,6 +116,8 @@ public abstract class Character {
             case "special2":
                 current = special2;
                 break;
+            case "evil":
+                current = evil;
             default:
                 current = null;
                 System.out.println("Image change failed, defaulting to neutral for P" + playerNo);
@@ -124,6 +126,9 @@ public abstract class Character {
     }
 
     public void special(){
+        if (specialCount == 100) {
+            specialCount = 0;
+        }
     }
 
     public void headbutt(){
@@ -131,7 +136,7 @@ public abstract class Character {
             attackState = 3;
             markerFrame = Window.getTick();
         }
-        if (Window.getTick() - markerFrame == 5) {
+        if (attackState == 3 && Window.getTick() - markerFrame == 10) {
             changeImage("headbutt");
             if (playerNo) { //this nest is hurting me send help
                 if (Window.isHit(playerNo)) {
@@ -161,7 +166,7 @@ public abstract class Character {
                 }
             }
         }
-        if (Window.getTick() - markerFrame >= 25) {
+        if (attackState == 3 && Window.getTick() - markerFrame >= 30) {
             attackState = 0;
         }
     }
@@ -187,7 +192,7 @@ public abstract class Character {
             markerFrame = Window.getTick();
             changeImage("bite1");
         }
-        if (Window.getTick() - markerFrame == 30) { //actual bite 30 frames later
+        if (attackState == 1 && Window.getTick() - markerFrame == 30) { //actual bite 30 frames later
             changeImage("bite2");
             if (playerNo) { //this nest is hurting me send help
                 if (Window.isHit(playerNo)) {
@@ -217,7 +222,7 @@ public abstract class Character {
                 }
             }
         }
-        if (Window.getTick() - markerFrame >= 50) {
+        if (attackState == 1 && Window.getTick() - markerFrame >= 50) {
             attackState = 0;
         }
     }

@@ -47,6 +47,15 @@ public class HealthBar {
                 g2d.fillRect(1100, 11, health * 8, 38);
                 g2d.setColor(Color.RED);
                 g2d.fillRect(health * 8 + 1100, 11, 800 - health * 8, 38);
+                g2d.setColor(Color.BLACK);
+                g2d.drawRect(1501, 49, 400, 26);
+                g2d.setColor(Color.YELLOW);
+                if (Window.getTick() % 20 >= 10 && Window.p2.specialCount == 100) {
+                    g2d.setColor(Color.MAGENTA);
+                }
+                if (Window.p2.specialCount > 0) {
+                    g2d.fillRect(1502, 50, Window.p2.specialCount * 4 - 1, 25);
+                }
             }
         }
 

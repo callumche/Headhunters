@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,7 +13,8 @@ public class Callum extends Character{
     }
 
     public void special() {
-        if (attackState == 0) {
+        if (attackState == 0 && specialCount == 100) {
+            specialCount = 0;
             attackState = 5;
             markerFrame = Window.getTick();
             altDirection = lookingDirection;
@@ -23,12 +23,12 @@ public class Callum extends Character{
 
         lookingDirection = altDirection;
 
-        if (Window.getTick() - markerFrame >= 60) {
+        if (attackState == 5 && Window.getTick() - markerFrame >= 60) {
             changeImage("special2");
             firingLaser = true;
         }
 
-        if (Window.getTick() - markerFrame >= 180) {
+        if (attackState == 5 && Window.getTick() - markerFrame >= 180) {
             attackState = 0;
         }
 
@@ -47,6 +47,7 @@ public class Callum extends Character{
                 special2 = ImageIO.read(new File("res//Sprites//CallumSpecial2.PNG"));
                 spit1 = ImageIO.read(new File("res//Sprites//CallumSpit1.PNG"));
                 spit2 = ImageIO.read(new File("res//Sprites//CallumSpit2.PNG"));
+                evil = ImageIO.read(new File("res//Sprites//CallumEvil.PNG"));
             } catch (IOException e) {
                 System.out.println("Missing Callum Image: " + e);
             }
@@ -101,9 +102,9 @@ public class Callum extends Character{
         updateState();
 
         if (lookingDirection) {
-            g2d.drawImage(current, x + current.getWidth(), y, -current.getWidth(), current.getHeight(), null); //mirrored, look right
+            g2d.drawImage(current, x + current.getWidth() + Window.xOffset, y + Window.yOffset, -current.getWidth(), current.getHeight(), null); //mirrored, look right
         } else {
-            g2d.drawImage(current, x, y, current.getWidth(), current.getHeight(), null);
+            g2d.drawImage(current, x + Window.xOffset, y + Window.yOffset, current.getWidth(), current.getHeight(), null);
         }
         move();
     }

@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -25,6 +24,7 @@ public class Julian extends Character{
                 special2 = ImageIO.read(new File("res//Sprites//JulianSpecial2.PNG"));
                 spit1 = ImageIO.read(new File("res//Sprites//JulianSpit1.PNG"));
                 spit2 = ImageIO.read(new File("res//Sprites//JulianSpit2.PNG"));
+                evil = ImageIO.read(new File("res//Sprites//JulianEvil.PNG"));
             } catch (IOException e) {
                 System.out.println("Missing Julian Image: " + e);
             }
@@ -35,9 +35,9 @@ public class Julian extends Character{
         updateState();
 
         if (lookingDirection) {
-            g2d.drawImage(current, x + current.getWidth(), y, -current.getWidth(), current.getHeight(), null); //mirrored, look right
+            g2d.drawImage(current, x + current.getWidth() + Window.xOffset, y + Window.yOffset, -current.getWidth(), current.getHeight(), null); //mirrored, look right
         } else {
-            g2d.drawImage(current, x, y, current.getWidth(), current.getHeight(), null);
+            g2d.drawImage(current, x + Window.xOffset, y + Window.yOffset, current.getWidth(), current.getHeight(), null);
         }
         move();
     }
