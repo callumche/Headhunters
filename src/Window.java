@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Window extends JPanel {
     static SelectScreen startMenu = new SelectScreen();
-    Arena arena = new Arena();
+    static Arena arena = new Arena();
     WinScreen winS = new WinScreen();
     public static final int resX = 1920, resY = 1080;
     private static long globalTick = 0;
@@ -17,7 +17,7 @@ public class Window extends JPanel {
     static HealthBar hb1 , hb2;
     private static double playerDistance;
     private static boolean position = true; //true = P2 to right of P1, false = P2 to left
-    private static boolean finished = false, p1Winner = true;
+    private static boolean finished = false, p1Winner;
     public static ArrayList<Spit> spits = new ArrayList<Spit>();
     public Window(){
         addKeyListener(new KeyListener() {
