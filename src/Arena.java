@@ -66,20 +66,20 @@ public class Arena {
         }
         if (countdown){
             count = 4 - Helper.checkTime(0,0);
-            g2d.setColor(Color.BLACK);
+            g2d.setColor(Color.yellow);
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
             if (count >= 1) {
-                g2d.drawString("" + count, 1000, 200);
+                g2d.drawString("" + count, 925, 200);
             } else if (count==0){
-                g2d.drawString("GO",1000,200);
+                g2d.drawString("GO",925,200);
             } else {
                 countdown = false;
             }
         } else {
             time = 125 - Helper.checkTime(0, 0);
-            g2d.setColor(Color.BLACK);
-            g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
-            g2d.drawString("" + time, 1000, 30);
+            g2d.setColor(Color.yellow);
+            g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+            g2d.drawString("" + time, 925, 50);
         }
     }
 }
