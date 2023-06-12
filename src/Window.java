@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Window extends JPanel {
     static SelectScreen startMenu = new SelectScreen();
-    static Arena arena = new Arena();
+    static Arena arena;
     WinScreen winS = new WinScreen();
     public static final int resX = 1920, resY = 1080;
     private static long globalTick = 0;
@@ -116,6 +116,7 @@ public class Window extends JPanel {
         Character p2 = null;
         HealthBar hb1 = null;
         HealthBar hb2 = null;
+        //arena.setSuddenDeath(false);
         position = true; //true = P2 to right of P1, false = P2 to left
         finished = false;
         p1Winner = true;
@@ -153,6 +154,7 @@ public class Window extends JPanel {
     }
 
     public static void init() {
+        arena = new Arena();
         hb1 = new HealthBar(true);
         hb2 = new HealthBar(false);
         switch (playerOneSelect) {

@@ -10,14 +10,22 @@ public class Arena {
     private int arena;
     private boolean isInitialized = false, countdown = true, suddenDeath = false, starting = false;
     private BufferedImage phys;
-    private int time = 10, count = 3;
+    private int time, count;
 
     public Arena(){
     }
 
+    public void setSuddenDeath(boolean set){
+        suddenDeath = set;
+    }
+
+    public void setTime(int newTime){
+        time = newTime;
+    }
+
     public void paint(Graphics2D g2d){
         if (!isInitialized) {
-            time = 10;
+            time = 120;
             count = 4;
             isInitialized = true;
                 try {
@@ -78,14 +86,14 @@ public class Arena {
             if (count >= 1) {
                 g2d.drawString(String.valueOf(count), 925, 200);
             } else if (count==0){
-                g2d.drawString("GO",925,200);
+                g2d.drawString("GO",900,200);
             } else {
                 countdown = false;
             }
         } else if (suddenDeath) {
             g2d.setColor(Color.RED);
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-            g2d.drawString("SUDDEN DEATH", 725, 100);
+            g2d.drawString("SUDDEN DEATH", 775, 100);
         } else {
             g2d.setColor(Color.yellow);
             g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
