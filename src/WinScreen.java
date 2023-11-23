@@ -16,7 +16,6 @@ public class WinScreen {
     public static void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_SPACE){
             Window.restart();
-            System.out.println("k");
         }
     }
     private BufferedImage winner() {

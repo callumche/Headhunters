@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public abstract class Character {
     protected boolean left = false, right = false;
-    public int x = 480, y = 300;
-    public double xv = 0, yv = 0, xa = 0, ya = 0; //fuck you, im making this public (i don't want a trillion getters/setters) - FIX LATER?
+    protected int x = 480, y = 300;
+    protected double xv = 0, yv = 0, xa = 0, ya = 0; //fuck you, im making this public (i don't want a trillion getters/setters) - FIX LATER?
     protected int speedCap = 20, jumpCount = 0;
     protected boolean lookingDirection = true, altDirection = true; //false = left, true = right
     protected boolean playerNo; //true = P1, false = P2
@@ -13,7 +13,7 @@ public abstract class Character {
     protected BufferedImage neutral, jump, bite1, bite2, headbutt, hurt, special1, special2, spit1, spit2, evil;
     protected BufferedImage current;
     protected long markerFrame = 0;
-    public int health = 100, charType;
+    protected int health = 100, charType;
     protected int hurtDur = 0, startLen = 180;
     protected int specialCount = 0;
 

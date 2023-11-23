@@ -100,13 +100,6 @@ public class Window extends JPanel {
     }
 
     public static void restart(){
-        /*
-        isStarting = true;
-        finished = false;
-        p1Winner = true;
-        position = true;
-        globalTick = 0;
-         */
         globalTick = 0;
         isStarting = true;
         playerOneSelect = 4;
